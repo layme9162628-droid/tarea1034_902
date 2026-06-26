@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+import { getImage } from '../utils/images';
 ---
 <BaseLayout title="Proyecto 1">
 
@@ -203,15 +205,15 @@ import Footer from '../components/Footer.astro';
         <div class="gallery-grid">
           
           <div class="foto-slot foto-main">
-            <img src="/images/proy11.jpeg" alt="Vista principal del detector de números primos" style="width:100%;height:100%;object-fit:cover;">
+            <Image src={getImage('proy11.jpeg')} alt="Vista principal del detector de números primos" width={960} height={640} format="webp" quality={72} loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;" />
           </div>
           
           <div class="foto-slot">
-            <img src="/images/proy12.jpeg" alt="Simulación del circuito secuencial" style="width:100%;height:100%;object-fit:cover;">
+            <Image src={getImage('proy12.jpeg')} alt="Simulación del circuito secuencial" width={960} height={640} format="webp" quality={72} loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;" />
           </div>
           
           <div class="foto-slot">
-            <img src="/images/proy13.jpeg" alt="Detalle del procesamiento serial bit a bit" style="width:100%;height:100%;object-fit:cover;">
+            <Image src={getImage('proy13.jpeg')} alt="Detalle del procesamiento serial bit a bit" width={960} height={640} format="webp" quality={72} loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;" />
           </div>
 
         </div>

@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+import { getImage } from '../utils/images';
 ---
 <BaseLayout title="Curso 2 — Impresión 3D y Grabado Láser">
 
@@ -148,16 +150,16 @@ import Footer from '../components/Footer.astro';
         <span class="section-label">Galería</span>
         <div class="gallery-grid">
           <div class="photo-card foto-main">
-            <img src="/images/curso21.jpg" alt="Espacio de trabajo y modelado tridimensional paramétrico" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+            <Image src={getImage('curso21.jpg')} alt="Espacio de trabajo y modelado tridimensional paramétrico" width={960} height={640} format="webp" quality={72} loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;border-radius:10px;" />
           </div>
           <div class="photo-card">
-            <img src="/images/curso22.jpg" alt="Monitoreo mecánico de extrusores e impresión por deposición fundida" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+            <Image src={getImage('curso22.jpg')} alt="Monitoreo mecánico de extrusores e impresión por deposición fundida" width={960} height={640} format="webp" quality={72} loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;border-radius:10px;" />
           </div>
           <div class="photo-card">
-            <img src="/images/curso23.jpg" alt="Post-procesamiento y curado controlado de resinas líquidas fotopolímeras" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+            <Image src={getImage('curso23.jpg')} alt="Post-procesamiento y curado controlado de resinas líquidas fotopolímeras" width={960} height={640} format="webp" quality={72} loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;border-radius:10px;" />
           </div>
           <div class="photo-card">
-            <img src="/images/curso24.jpg" alt="Calibración óptica y operaciones finales de grabado por corte láser" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+            <Image src={getImage('curso24.jpg')} alt="Calibración óptica y operaciones finales de grabado por corte láser" width={960} height={640} format="webp" quality={72} loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;border-radius:10px;" />
           </div>
         </div>
       </section>

@@ -3,6 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import DarkToggle from '../components/DarkToggle.astro';
+import { Image } from 'astro:assets';
+import { getImage } from '../utils/images';
 
 const basePath = (import.meta.env.PUBLIC_BASE || '/').replace(/\/?$/, '/');
 ---
@@ -43,16 +45,16 @@ const basePath = (import.meta.env.PUBLIC_BASE || '/').replace(/\/?$/, '/');
     <div class="hero-photos">
       <div class="hero-photo-grid">
         <div class="hero-photo-slot">
-          <img src="/images/foto1.jpg" alt="Foto 1">
+          <Image src={getImage('foto1.jpg')} alt="Foto 1" width={520} height={520} format="webp" quality={72} loading="eager" decoding="async" />
         </div>
         <div class="hero-photo-slot">
-          <img src="/images/foto2.jpg" alt="Foto 2">
+          <Image src={getImage('foto2.jpg')} alt="Foto 2" width={520} height={520} format="webp" quality={72} loading="eager" decoding="async" />
         </div>
         <div class="hero-photo-slot">
-          <img src="/images/fotos3.jpg" alt="Foto 3">
+          <Image src={getImage('fotos3.jpg')} alt="Foto 3" width={520} height={520} format="webp" quality={72} loading="eager" decoding="async" />
         </div>
         <div class="hero-photo-slot">
-          <img src="/images/fotos4.jpg" alt="Foto 4">
+          <Image src={getImage('fotos4.jpg')} alt="Foto 4" width={520} height={520} format="webp" quality={72} loading="eager" decoding="async" />
         </div>
       </div>
     </div>
@@ -181,7 +183,7 @@ const basePath = (import.meta.env.PUBLIC_BASE || '/').replace(/\/?$/, '/');
         <!-- Proyecto 1 -->
         <article class="project-card">
           <div class="project-img">
-            <img src="/images/proyecto1_index.jpeg" alt="Detector de números primos" />
+            <Image src={getImage('proyecto1_index.jpeg')} alt="Detector de números primos" width={720} height={405} format="webp" quality={70} loading="lazy" decoding="async" />
           </div>
           <div class="project-body">
             <div class="project-title">Detector de numeros primos</div>
@@ -210,7 +212,7 @@ const basePath = (import.meta.env.PUBLIC_BASE || '/').replace(/\/?$/, '/');
         <!-- Proyecto 2 -->
         <article class="project-card">
           <div class="project-img">
-            <img src="/images/proyecto2_index.jpeg" alt="Electrocardiófono" />
+            <Image src={getImage('proyecto2_index.jpeg')} alt="Electrocardiófono" width={720} height={405} format="webp" quality={70} loading="lazy" decoding="async" />
           </div>
           <div class="project-body">
             <div class="project-title">ELECTROCARDIOFONO</div>
@@ -238,7 +240,7 @@ const basePath = (import.meta.env.PUBLIC_BASE || '/').replace(/\/?$/, '/');
         <!-- Proyecto 3 -->
         <article class="project-card">
           <div class="project-img">
-            <img src="/images/proyecto3_index.jpeg" alt="Grúa clasificadora de cubos" />
+            <Image src={getImage('proyecto3_index.jpeg')} alt="Grúa clasificadora de cubos" width={720} height={405} format="webp" quality={70} loading="lazy" decoding="async" />
           </div>
           <div class="project-body">
             <div class="project-title">Grúa controlada por microcontrolador capaz de clasificar cubos de colores</div>
@@ -280,7 +282,7 @@ const basePath = (import.meta.env.PUBLIC_BASE || '/').replace(/\/?$/, '/');
         <!-- Curso 1 -->
         <article class="project-card">
           <div class="project-img">
-            <img src="/images/curso1_index.jpeg" alt="Manejo de Drones" />
+            <Image src={getImage('curso1_index.jpeg')} alt="Manejo de Drones" width={720} height={405} format="webp" quality={70} loading="lazy" decoding="async" />
           </div>
           <div class="project-body">
             <div class="project-title">Manejo de Drones, procesamiento de Imágenes y captura Area</div>
@@ -304,7 +306,7 @@ const basePath = (import.meta.env.PUBLIC_BASE || '/').replace(/\/?$/, '/');
         <!-- Curso 2 -->
         <article class="project-card">
           <div class="project-img">
-            <img src="/images/curso2_index.jpg" alt="Impresión 3D, Resina y Láser" />
+            <Image src={getImage('curso2_index.jpg')} alt="Impresión 3D, Resina y Láser" width={720} height={405} format="webp" quality={70} loading="lazy" decoding="async" />
           </div>
           <div class="project-body">
             <div class="project-title">Impresión en 3D, Resina y grabado de Laser</div>
@@ -324,7 +326,7 @@ const basePath = (import.meta.env.PUBLIC_BASE || '/').replace(/\/?$/, '/');
         <!-- Curso 3 -->
         <article class="project-card">
           <div class="project-img">
-            <img src="/images/curso3_index.jpeg" alt="Curso de Idioma Chino" />
+            <Image src={getImage('curso3_index.jpeg')} alt="Curso de Idioma Chino" width={720} height={405} format="webp" quality={70} loading="lazy" decoding="async" />
           </div>
           <div class="project-body">
             <div class="project-title">Curso de Idioma Chino</div>

@@ -1,16 +1,19 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 interface Props {
   title: string;
   description: string;
-  img?: string;
+  img?: ImageMetadata;
   tags?: string[];
   href?: string;
 }
-const { title, description, img = '/images/projects/placeholder.jpg', tags = [], href = '#' } = Astro.props;
+const { title, description, img, tags = [], href = '#' } = Astro.props;
 ---
 <article class="project-card">
   <div class="project-img">
-    {img && <img src={Astro.resolve(img)} alt={title} />}
+    {img && <Image src={img} alt={title} width={720} height={405} format="webp" quality={70} loading="lazy" decoding="async" />}
   </div>
   <div class="project-body">
     <div class="project-title">{title}</div>

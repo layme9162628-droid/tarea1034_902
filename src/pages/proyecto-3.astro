@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+import { getImage } from '../utils/images';
 ---
 <BaseLayout title="Proyecto 1">
 
@@ -179,15 +181,15 @@ import Footer from '../components/Footer.astro';
   <div class="gallery-grid">
     
     <div class="foto-slot foto-main">
-      <img src="/images/proy31.jpeg" alt="Circuito integrado del Electrocardiófono" style="width:100%;height:100%;object-fit:cover;">
+      <Image src={getImage('proy31.jpeg')} alt="Circuito integrado del Electrocardiófono" width={960} height={640} format="webp" quality={72} loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;" />
     </div>
     
     <div class="foto-slot">
-      <img src="/images/proy32.jpg" alt="Etapa de filtrado Twin-T Notch" style="width:100%;height:100%;object-fit:cover;">
+      <Image src={getImage('proy32.jpg')} alt="Etapa de filtrado Twin-T Notch" width={960} height={640} format="webp" quality={72} loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;" />
     </div>
     
     <div class="foto-slot">
-      <img src="/images/proy33.jpg" alt="Pruebas de captación de señal ECG con electrodos" style="width:100%;height:100%;object-fit:cover;">
+      <Image src={getImage('proy33.jpg')} alt="Pruebas de captación de señal ECG con electrodos" width={960} height={640} format="webp" quality={72} loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;" />
     </div>
 
   </div>
