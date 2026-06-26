@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tu Nombre — Portfolio</title>
+  <meta name="description" content="Portfolio personal de Tu Nombre: presentación, proyectos, experiencia y contacto.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+
+
+    :root {
+      --clr-ink:      #0d0d0d;
+      --clr-paper:    #f5f2ed;
+      --clr-accent:   #c8a96e;   /* warm gold */
+      --clr-dim:      rgba(255,255,255,0.55);
+      --clr-overlay1: rgba(10,10,10,0.52);
+      --clr-overlay2: rgba(14,18,26,0.70);
+      --clr-overlay3: rgba(20,14,10,0.60);
+
+      --ff-body:    'DM Sans', system-ui, sans-serif;
+      --ff-mono:    'DM Mono', 'Courier New', monospace;
+
+      --fs-label:   0.72rem;
+      --fs-body:    1rem;
+      --fs-lead:    1.2rem;
+      --fs-h2:      2.2rem;
+      --fs-display: clamp(2.8rem, 6vw, 5rem);
+
+      --radius-card: 12px;
+      --gap-section: clamp(2rem, 5vw, 4rem);
+    }
+
+    /* ──────────────────────────────────────────
+       RESET & BASE
+    ────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--ff-body);
+      font-size: var(--fs-body);
+      color: var(--clr-ink);
+      background: var(--clr-paper);
+      line-height: 1.65;
+    }
+
+    img { display: block; max-width: 100%; }
+    a   { color: inherit; text-decoration: none; }
+
+    /* ──────────────────────────────────────────
+       NAV (fijo en la parte superior)
+    ────────────────────────────────────────── */
+    .site-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px clamp(24px, 6vw, 80px);
+      background: transparent;
+      transition: background 0.35s ease, backdrop-filter 0.35s ease;
+    }
+    .site-nav.scrolled {
+      background: rgba(10,10,10,0.75);
+      backdrop-filter: blur(12px);
+    }
+    .nav-brand {
+      font-family: var(--ff-mono);
+      font-size: 0.85rem;
+      color: #fff;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: var(--fs-label);
+      font-family: var(--ff-mono);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--clr-accent); }
+
+    /* ──────────────────────────────────────────
+       SECCIÓN COMPARTIDA — utilidades
+    ────────────────────────────────────────── */
+    .section-label {
+      display: inline-block;
+      font-family: var(--ff-mono);
+      font-size: var(--fs-label);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--clr-accent);
+      border-bottom: 1px solid var(--clr-accent);
+      padding-bottom: 4px;
+      margin-bottom: 1.2rem;
+    }
+
+    .bg-section {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed; /* parallax suave */
+      position: relative;
+    }
+
+    /* ──────────────────────────────────────────
+       SECCIÓN 1 — HERO / SOBRE MÍ
+    ────────────────────────────────────────── */
+    #sobre-mi {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      /* ▶ IMAGEN DE FONDO 1
+         Reemplaza "ruta_de_tu_imagen.jpg" con tu archivo,
+         p. ej.: url('images/fondos/hero.jpg')            */
+      background-image: url('ruta_de_tu_imagen.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      /* Fallback si no hay imagen: */
+      background-color: #1a1a2e;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--clr-overlay1);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+      padding: clamp(100px, 12vh, 160px) clamp(24px, 8vw, 120px) clamp(60px, 8vh, 100px);
+    }
+
+    .hero-content h1 {
+      font-size: var(--fs-display);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero-content h1 span {
+      color: var(--clr-accent);
+    }
+
+    .hero-content p.lead {
+      font-size: var(--fs-lead);
+      color: var(--clr-dim);
+      max-width: 540px;
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 2.4rem;
+    }
+    .hero-tags span {
+      font-family: var(--ff-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(200,169,110,0.5);
+      padding: 6px 14px;
+      border-radius: 999px;
+    }
+
+    .scroll-hint {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.45);
+      font-family: var(--ff-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .scroll-hint::before {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.3);
+      animation: scrollLine 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50%       { opacity: 1;   transform: scaleY(1.3); }
+    }
+
+    /* ──────────────────────────────────────────
+       SECCIÓN 2 — EXPERIENCIA / PROYECTOS / CURSOS
+    ────────────────────────────────────────── */
+    #experiencia {
+      /* ▶ IMAGEN DE FONDO 2
+         Reemplaza con tu imagen:
+         p. ej.: url('images/fondos/experiencia.jpg')     */
+      background-image: url('ruta_de_tu_imagen_2.jpg');
+      background-color: #0e1218;
+      background-attachment: fixed;
+    }
+
+    .exp-overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--clr-overlay2);
+    }
+
+    .exp-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: var(--gap-section) clamp(24px, 6vw, 80px);
+    }
+
+    /* — Bloques de título de subsección — */
+    .sub-heading {
+      font-size: var(--fs-h2);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+    .sub-desc {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.95rem;
+      max-width: 540px;
+      margin-bottom: 2.4rem;
+    }
+
+    /* ── PROYECTOS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: var(--gap-section);
+    }
+
+    .project-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(200,169,110,0.2);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+    }
+
+    /* Área de imagen del proyecto */
+    .project-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      background: rgba(255,255,255,0.08);
+      /* Fallback visual si no hay imagen aún */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.2);
+      font-family: var(--ff-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      min-height: 180px;
+    }
+    .project-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .project-body {
+      padding: 20px 22px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .project-desc {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.55);
+      flex: 1;
+      margin-bottom: 16px;
+    }
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .project-tags span {
+      font-family: var(--ff-mono);
+      font-size: 0.68rem;
+      color: var(--clr-accent);
+      border: 1px solid rgba(200,169,110,0.4);
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+    .project-link {
+      align-self: flex-start;
+      font-family: var(--ff-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--clr-accent);
+      border-bottom: 1px solid rgba(200,169,110,0.4);
+      padding-bottom: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .project-link:hover {
+      color: #fff;
+      border-color: #fff;
+    }
+
+    /* ── CURSOS ── */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: var(--gap-section);
+    }
+
+    .course-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: background 0.25s ease;
+    }
+    .course-card:hover {
+      background: rgba(255,255,255,0.08);
+    }
+
+    .course-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      background: rgba(255,255,255,0.06);
+      min-height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.15);
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+    }
+    .course-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .course-body {
+      padding: 16px 18px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .course-institution {
+      font-family: var(--ff-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--clr-accent);
+      margin-bottom: 6px;
+    }
+    .course-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .course-desc {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      flex: 1;
+    }
+
+    /* ── EXPERIENCIA LABORAL (timeline) ── */
+    .timeline {
+      margin-bottom: var(--gap-section);
+      border-left: 1px solid rgba(200,169,110,0.3);
+      padding-left: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .timeline-item {
+      position: relative;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -34px;
+      top: 6px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--clr-accent);
+      border: 2px solid #0e1218;
+    }
+    .timeline-date {
+      font-family: var(--ff-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 4px;
+    }
+    .timeline-role {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+    .timeline-company {
+      font-size: 0.9rem;
+      color: var(--clr-accent);
+      margin-bottom: 8px;
+    }
+    .timeline-body {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ──────────────────────────────────────────
+       SECCIÓN 3 — CONTACTO
+    ────────────────────────────────────────── */
+    #contacto {
+      /* ▶ IMAGEN DE FONDO 3
+         Reemplaza con tu imagen:
+         p. ej.: url('images/fondos/contacto.jpg')        */
+      background-image: url('ruta_de_tu_imagen_3.jpg');
+      background-color: #140e0a;
+      background-attachment: fixed;
+    }
+
+    .contact-overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--clr-overlay3);
+    }
+
+    .contact-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--gap-section) clamp(24px, 6vw, 80px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .contact-info h2 {
+      font-size: var(--fs-h2);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .contact-info p {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .social-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .social-list a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .social-list a:hover { color: var(--clr-accent); }
+    .social-icon {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      transition: border-color 0.2s;
+    }
+    .social-list a:hover .social-icon { border-color: var(--clr-accent); }
+
+    /* Formulario */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #fff;
+      font-family: var(--ff-body);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: rgba(255,255,255,0.3);
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--clr-accent);
+    }
+    .contact-form textarea { resize: vertical; min-height: 120px; }
+
+    .btn-send {
+      align-self: flex-start;
+      background: var(--clr-accent);
+      color: #0d0d0d;
+      border: none;
+      padding: 13px 32px;
+      border-radius: 8px;
+      font-family: var(--ff-mono);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-send:hover {
+      background: #e0c082;
+      transform: translateY(-2px);
+    }
+
+    /* ──────────────────────────────────────────
+       FOOTER
+    ────────────────────────────────────────── */
+    .site-footer {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 24px;
+      background: rgba(0,0,0,0.4);
+      font-family: var(--ff-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* ──────────────────────────────────────────
+       RESPONSIVE
+    ────────────────────────────────────────── */
+    @media (max-width: 720px) {
+      .contact-inner {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+      .form-row { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 500px) {
+      .projects-grid { grid-template-columns: 1fr; }
+      .courses-grid  { grid-template-columns: 1fr; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .bg-section { background-attachment: scroll; }
+      #sobre-mi   { background-attachment: scroll; }
+      #experiencia{ background-attachment: scroll; }
+      #contacto   { background-attachment: scroll; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAV
+  ═══════════════════════════════════════════ -->
+  <nav class="site-nav" id="site-nav" aria-label="Navegación principal">
+    <span class="nav-brand">Tu Nombre</span>
+    <ul class="nav-links">
+      <li><a href="#sobre-mi">Inicio</a></li>
+      <li><a href="#experiencia">Experiencia</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════
+       SECCIÓN 1 — HERO / SOBRE MÍ
+  ═══════════════════════════════════════════ -->
+  <section id="sobre-mi" class="bg-section" aria-label="Sobre mí">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <span class="section-label">Sobre mí</span>
+
+      <h1>Hola, soy<br><span>Tu Nombre.</span></h1>
+
+      <p class="lead">
+        Soy [tu especialidad] apasionado/a por [lo que te mueve].
+        Creo que el buen diseño y el código limpio tienen el poder
+        de transformar cómo las personas viven sus días.
+      </p>
+
+      <div class="hero-tags">
+        <span>HTML &amp; CSS</span>
+        <span>JavaScript</span>
+        <span>React</span>
+        <span>UX / UI</span>
+        <!-- Añade o elimina etiquetas según tus habilidades -->
+      </div>
+
+      <div class="scroll-hint" aria-hidden="true">Desliza para explorar</div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SECCIÓN 2 — EXPERIENCIA / PROYECTOS / CURSOS
+  ═══════════════════════════════════════════ -->
+  <section id="experiencia" class="bg-section" aria-label="Experiencia, proyectos y cursos">
+    <div class="exp-overlay"></div>
+
+    <div class="exp-inner">
+
+      <!-- ── EXPERIENCIA LABORAL ── -->
+      <span class="section-label">Trayectoria</span>
+      <h2 class="sub-heading">Experiencia laboral</h2>
+      <p class="sub-desc">Cada rol me ha dado una perspectiva distinta sobre cómo crear productos que importan.</p>
+
+      <div class="timeline" role="list">
+
+        <div class="timeline-item" role="listitem">
+          <div class="timeline-date">2022 — Presente</div>
+          <div class="timeline-role">Tu Rol Actual</div>
+          <div class="timeline-company">Empresa Ejemplo</div>
+          <p class="timeline-body">Describe tus responsabilidades principales y los logros más relevantes en este puesto. Sé específico/a sobre el impacto de tu trabajo.</p>
+        </div>
+
+        <div class="timeline-item" role="listitem">
+          <div class="timeline-date">2020 — 2022</div>
+          <div class="timeline-role">Rol Anterior</div>
+          <div class="timeline-company">Empresa Anterior</div>
+          <p class="timeline-body">Descripción de responsabilidades y aprendizajes clave de esta etapa profesional.</p>
+        </div>
+
+      </div>
+
+      <!-- ── PROYECTOS ── -->
+      <span class="section-label">Trabajo</span>
+      <h2 class="sub-heading">Proyectos</h2>
+      <p class="sub-desc">Selección de proyectos que reflejan mi enfoque y habilidades técnicas.</p>
+
+      <div class="projects-grid">
+
+        <!-- Proyecto 1 -->
+        <article class="project-card">
+          <div class="project-img">
+            <!--
+              ▶ IMAGEN DEL PROYECTO 1
+              Reemplaza el src con tu imagen:
+              <img src="images/proyectos/proyecto-1.jpg" alt="Captura del proyecto 1">
+              Mientras no tengas imagen, deja el texto de abajo como placeholder.
+            -->
+            <span>imagen_proyecto_1.jpg</span>
+          </div>
+          <div class="project-body">
+            <div class="project-title">Nombre del Proyecto 1</div>
+            <p class="project-desc">
+              Describe el proyecto: qué problema resuelve, cuál fue tu rol
+              y cuál fue el resultado final. Sé concreto/a.
+            </p>
+            <div class="project-tags">
+              <span>React</span>
+              <span>Node.js</span>
+              <span>Firebase</span>
+            </div>
+            <a href="https://enlace-del-proyecto-1.com" target="_blank" rel="noopener noreferrer" class="project-link">
+              Ver proyecto ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- Proyecto 2 -->
+        <article class="project-card">
+          <div class="project-img">
+            <!--
+              ▶ IMAGEN DEL PROYECTO 2
+              <img src="images/proyectos/proyecto-2.jpg" alt="Captura del proyecto 2">
+            -->
+            <span>imagen_proyecto_2.jpg</span>
+          </div>
+          <div class="project-body">
+            <div class="project-title">Nombre del Proyecto 2</div>
+            <p class="project-desc">
+              Descripción del segundo proyecto: contexto, tecnologías
+              y resultado. Qué aprendiste o qué hiciste distinto aquí.
+            </p>
+            <div class="project-tags">
+              <span>Python</span>
+              <span>Django</span>
+              <span>PostgreSQL</span>
+            </div>
+            <a href="https://enlace-del-proyecto-2.com" target="_blank" rel="noopener noreferrer" class="project-link">
+              Ver proyecto ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- Proyecto 3 -->
+        <article class="project-card">
+          <div class="project-img">
+            <!--
+              ▶ IMAGEN DEL PROYECTO 3
+              <img src="images/proyectos/proyecto-3.jpg" alt="Captura del proyecto 3">
+            -->
+            <span>imagen_proyecto_3.jpg</span>
+          </div>
+          <div class="project-body">
+            <div class="project-title">Nombre del Proyecto 3</div>
+            <p class="project-desc">
+              Descripción del tercer proyecto. Puedes mencionar el cliente,
+              el objetivo de negocio y el impacto medible.
+            </p>
+            <div class="project-tags">
+              <span>Figma</span>
+              <span>CSS Grid</span>
+              <span>TypeScript</span>
+            </div>
+            <a href="https://enlace-del-proyecto-3.com" target="_blank" rel="noopener noreferrer" class="project-link">
+              Ver proyecto ↗
+            </a>
+          </div>
+        </article>
+
+      </div><!-- /projects-grid -->
+
+
+      <!-- ── CURSOS ── -->
+      <span class="section-label">Formación</span>
+      <h2 class="sub-heading">Cursos y certificaciones</h2>
+      <p class="sub-desc">Aprendizaje continuo como práctica, no como obligación.</p>
+
+      <div class="courses-grid">
+
+        <!-- Curso 1 -->
+        <article class="course-card">
+          <div class="course-img">
+            <!--
+              ▶ IMAGEN DEL CURSO 1
+              <img src="images/cursos/curso-1.jpg" alt="Certificado o captura del curso 1">
+            -->
+            <span>imagen_curso_1.jpg</span>
+          </div>
+          <div class="course-body">
+            <div class="course-institution">Plataforma / Institución</div>
+            <div class="course-title">Nombre del Curso 1</div>
+            <p class="course-desc">Descripción breve de lo que aprendiste y cómo aplicas ese conocimiento.</p>
+          </div>
+        </article>
+
+        <!-- Curso 2 -->
+        <article class="course-card">
+          <div class="course-img">
+            <!--
+              ▶ IMAGEN DEL CURSO 2
+              <img src="images/cursos/curso-2.jpg" alt="Certificado o captura del curso 2">
+            -->
+            <span>imagen_curso_2.jpg</span>
+          </div>
+          <div class="course-body">
+            <div class="course-institution">Plataforma / Institución</div>
+            <div class="course-title">Nombre del Curso 2</div>
+            <p class="course-desc">Descripción breve de lo que aprendiste y cómo aplicas ese conocimiento.</p>
+          </div>
+        </article>
+
+        <!-- Curso 3 -->
+        <article class="course-card">
+          <div class="course-img">
+            <!--
+              ▶ IMAGEN DEL CURSO 3
+              <img src="images/cursos/curso-3.jpg" alt="Certificado o captura del curso 3">
+            -->
+            <span>imagen_curso_3.jpg</span>
+          </div>
+          <div class="course-body">
+            <div class="course-institution">Plataforma / Institución</div>
+            <div class="course-title">Nombre del Curso 3</div>
+            <p class="course-desc">Descripción breve de lo que aprendiste y cómo aplicas ese conocimiento.</p>
+          </div>
+        </article>
+
+        <!-- Curso 4 -->
+        <article class="course-card">
+          <div class="course-img">
+            <!--
+              ▶ IMAGEN DEL CURSO 4
+              <img src="images/cursos/curso-4.jpg" alt="Certificado o captura del curso 4">
+            -->
+            <span>imagen_curso_4.jpg</span>
+          </div>
+          <div class="course-body">
+            <div class="course-institution">Plataforma / Institución</div>
+            <div class="course-title">Nombre del Curso 4</div>
+            <p class="course-desc">Descripción breve de lo que aprendiste y cómo aplicas ese conocimiento.</p>
+          </div>
+        </article>
+
+      </div><!-- /courses-grid -->
+
+    </div><!-- /exp-inner -->
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SECCIÓN 3 — CONTACTO
+  ═══════════════════════════════════════════ -->
+  <section id="contacto" class="bg-section" aria-label="Contacto">
+    <div class="contact-overlay"></div>
+
+    <div class="contact-inner">
+
+      <!-- Info + redes -->
+      <div class="contact-info">
+        <span class="section-label">Contacto</span>
+        <h2>Hablemos.</h2>
+        <p>¿Tienes un proyecto en mente o quieres explorar cómo colaborar? Escríbeme directamente o usa el formulario.</p>
+
+        <ul class="social-list" aria-label="Redes sociales">
+          <li>
+            <a href="mailto:tucorreo@ejemplo.com" aria-label="Correo electrónico">
+              <span class="social-icon" aria-hidden="true">✉</span>
+              tucorreo@ejemplo.com
+            </a>
+          </li>
+          <li>
+            <a href="https://linkedin.com/in/tu-usuario" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <span class="social-icon" aria-hidden="true">in</span>
+              linkedin.com/in/tu-usuario
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/tu-usuario" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <span class="social-icon" aria-hidden="true">⌥</span>
+              github.com/tu-usuario
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/tu-usuario" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
+              <span class="social-icon" aria-hidden="true">𝕏</span>
+              @tu-usuario
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Formulario -->
+      <div>
+        <span class="section-label" style="margin-bottom:1.4rem;">Formulario</span>
+        <form class="contact-form" action="#" method="post" novalidate>
+          <div class="form-row">
+            <input type="text"  name="nombre"  placeholder="Tu nombre"  required>
+            <input type="email" name="email"   placeholder="Tu email"   required>
+          </div>
+          <input type="text"    name="asunto"  placeholder="Asunto">
+          <textarea             name="mensaje" placeholder="Cuéntame sobre tu proyecto o idea…" required></textarea>
+          <button type="submit" class="btn-send">Enviar mensaje</button>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- Footer dentro de la sección de contacto -->
+    <footer class="site-footer">
+      <span>Hecho por Tu Nombre — Reemplaza este texto cuando publiques</span>
+    </footer>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SCRIPT — Nav scroll + smooth highlight
+  ═══════════════════════════════════════════ -->
+  <script>
+    // Oscurecer la nav al hacer scroll
+    const nav = document.getElementById('site-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
+
+
+<!--
+╔══════════════════════════════════════════════════════════════════╗
+║         GUÍA DE IMÁGENES — LEE ESTO ANTES DE PUBLICAR          ║
+╚══════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. ESTRUCTURA DE CARPETAS RECOMENDADA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+mi-portfolio/
+│
+├── index.html            ← Este archivo
+│
+└── images/               ← Carpeta raíz para todas las imágenes
+    ├── fondos/           ← Imágenes de fondo de cada sección
+    │   ├── hero.jpg              (Sección 1 — Sobre mí)
+    │   ├── experiencia.jpg       (Sección 2 — Experiencia)
+    │   └── contacto.jpg          (Sección 3 — Contacto)
+    │
+    ├── proyectos/        ← Capturas o fotos de tus proyectos
+    │   ├── proyecto-1.jpg
+    │   ├── proyecto-2.jpg
+    │   └── proyecto-3.jpg
+    │
+    └── cursos/           ← Certificados o capturas de tus cursos
+        ├── curso-1.jpg
+        ├── curso-2.jpg
+        ├── curso-3.jpg
+        └── curso-4.jpg
+
+REGLA IMPORTANTE: index.html y la carpeta images/ deben estar
+en el mismo nivel (misma carpeta). Si mueves index.html,
+ajusta las rutas.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. CÓMO REFERENCIAR LAS IMÁGENES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+A) FONDOS CSS (busca en el CSS "ruta_de_tu_imagen"):
+
+  Cambia esto →  background-image: url('ruta_de_tu_imagen.jpg');
+  Por esto →     background-image: url('images/fondos/hero.jpg');
+
+  Haz lo mismo para las secciones 2 y 3:
+  · url('images/fondos/experiencia.jpg')
+  · url('images/fondos/contacto.jpg')
+
+
+B) IMÁGENES EN TARJETAS DE PROYECTOS (busca los comentarios
+   "▶ IMAGEN DEL PROYECTO"):
+
+  Actualmente verás un texto placeholder como:
+    <span>imagen_proyecto_1.jpg</span>
+
+  Debes ELIMINAR ese <span> y pegar dentro del <div class="project-img">
+  una etiqueta <img> así:
+
+    <div class="project-img">
+      <img src="images/proyectos/proyecto-1.jpg"
+           alt="Captura del Proyecto 1">
+    </div>
+
+
+C) IMÁGENES EN TARJETAS DE CURSOS (busca "▶ IMAGEN DEL CURSO"):
+
+  Igual que los proyectos, dentro del <div class="course-img">:
+
+    <div class="course-img">
+      <img src="images/cursos/curso-1.jpg"
+           alt="Certificado del Curso 1">
+    </div>
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. FORMATOS Y TAMAÑOS RECOMENDADOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FONDOS DE SECCIÓN (hero.jpg, experiencia.jpg, contacto.jpg)
+· Formato:  JPG (JPEG) — mejor para fotografías con gradientes
+· Ancho:    1920 px (mínimo) — 2560 px si quieres calidad 4K
+· Alto:     1080 px (mínimo)
+· Peso:     No superar los 300 KB. Usa squoosh.app o tinyjpg.com
+             para comprimir sin pérdida de calidad visible.
+· Tip:      Escoge imágenes oscuras o que admitan bien una capa
+             semitransparente encima (el overlay del CSS).
+
+IMÁGENES DE PROYECTOS
+· Formato:  JPG para capturas de pantalla, PNG si necesitas fondo
+             transparente, WebP si quieres máxima optimización.
+· Relación: 16:9 (ej. 1280×720 px). El CSS ya la fuerza con
+             aspect-ratio: 16/9, así que se recortará si difiere.
+· Peso:     Máximo 200 KB por imagen.
+
+IMÁGENES DE CURSOS
+· Formato:  JPG o PNG
+· Relación: 4:3 (ej. 800×600 px). También forzado por el CSS.
+· Peso:     Máximo 150 KB por imagen.
+
+HERRAMIENTAS GRATUITAS DE COMPRESIÓN:
+· squoosh.app   — convierte y comprime a WebP, JPG, PNG
+· tinyjpg.com   — compresión rápida de JPG/PNG sin registrarse
+· cloudconvert.com — si necesitas convertir formatos
+
+SOBRE WebP:
+Es el formato más moderno y ligero. Si todos tus visitantes
+usarán navegadores modernos (Chrome, Edge, Firefox, Safari ≥14),
+puedes renombrar tus archivos a .webp y usar:
+  <img src="images/proyectos/proyecto-1.webp" alt="...">
+Reduce el peso entre un 25–35% respecto a JPG.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. VERIFICACIÓN LOCAL (antes de publicar)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Para ver tu página con las imágenes locales, NO abras el archivo
+directamente con doble clic (protocolo file://). En su lugar:
+
+Opción A — Con VS Code:
+  Instala la extensión "Live Server", haz clic derecho en
+  index.html → "Open with Live Server". El navegador se abrirá
+  en http://127.0.0.1:5500 y verás las imágenes.
+
+Opción B — Con Python (si lo tienes instalado):
+  En la terminal, dentro de la carpeta mi-portfolio/:
+    python -m http.server 8000
+  Luego abre: http://localhost:8000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. NOMBRE DE ARCHIVOS — BUENAS PRÁCTICAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✔  Todo en minúsculas:           hero.jpg  (no HERO.jpg)
+✔  Sin espacios, usa guiones:    mi-proyecto.jpg  (no mi proyecto.jpg)
+✔  Sin acentos ni ñ:             experiencia.jpg  (no experiéncia.jpg)
+✔  Nombres descriptivos:         fondo-oscuro-montanas.jpg
+
+Esto evita errores en servidores Linux (distinguen mayúsculas)
+y en URL encoding al publicar online.
+
+╚══════════════════════════════════════════════════════════════════╝
+-->

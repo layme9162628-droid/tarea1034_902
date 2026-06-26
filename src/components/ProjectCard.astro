@@ -1,0 +1,23 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  img?: string;
+  tags?: string[];
+  href?: string;
+}
+const { title, description, img = '/images/projects/placeholder.jpg', tags = [], href = '#' } = Astro.props;
+---
+<article class="project-card">
+  <div class="project-img">
+    {img && <img src={Astro.resolve(img)} alt={title} />}
+  </div>
+  <div class="project-body">
+    <div class="project-title">{title}</div>
+    <p class="project-desc">{description}</p>
+    <div class="project-tags">
+      {tags.map((t)=> <span>{t}</span>)}
+    </div>
+    <a class="project-link" href={href} target="_blank" rel="noopener noreferrer">Ver proyecto ↗</a>
+  </div>
+</article>

@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout title="Curso 2 — Impresión 3D y Grabado Láser">
+
+  <style>
+    :root {
+      --clr-accent: #c8a96e;
+      --clr-dim: rgba(255,255,255,0.78);
+      --clr-surface: rgba(255,255,255,0.06);
+      --clr-border: rgba(255,255,255,0.1);
+      --ff-body: 'DM Sans', system-ui, sans-serif;
+      --ff-mono: 'DM Mono', 'Courier New', monospace;
+      --radius: 18px;
+    }
+
+    .project-page { position: relative; min-height: 100vh; padding: clamp(100px, 12vh, 140px) 24px 80px; background: linear-gradient(135deg, #101626 0%, #0a1220 100%); color: #fff; font-family: var(--ff-body); overflow: hidden; }
+    .project-page::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(200,169,110,0.17), transparent 22%), radial-gradient(circle at left center, rgba(255,255,255,0.04), transparent 16%); pointer-events: none; }
+    .project-inner { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; }
+    .section-label { display: inline-block; font-family: var(--ff-mono); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--clr-accent); border-bottom: 1px solid var(--clr-accent); padding-bottom: 4px; margin-bottom: 1.2rem; }
+    h1 { font-size: clamp(2.8rem, 6vw, 4.2rem); line-height: 1.05; font-weight: 700; margin-bottom: 1rem; }
+    h1 span { display: inline-block; color: var(--clr-accent); }
+    .lead { max-width: 720px; font-size: 1.12rem; line-height: 1.85; color: var(--clr-dim); margin-bottom: 2.4rem; }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2.8rem; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 12px 16px; border-radius: 999px; background: var(--clr-surface); border: 1px solid var(--clr-border); font-family: var(--ff-mono); font-size: 0.78rem; letter-spacing: 0.1em; }
+    .hero-badge strong { color: var(--clr-accent); }
+    .hero-link { display: inline-flex; align-items: center; gap: 8px; font-family: var(--ff-mono); font-size: 0.78rem; letter-spacing: 0.1em; color: var(--clr-accent); border-bottom: 1px solid rgba(200,169,110,0.4); }
+    .section-panel { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 32px; margin-top: 56px; }
+    .section-panel h2 { font-size: clamp(1.7rem, 3vw, 2rem); margin-bottom: 1rem; }
+    .subdesc { color: var(--clr-dim); font-size: 0.95rem; line-height: 1.75; margin-bottom: 2rem; max-width: 700px; }
+    .grid-2 { display: grid; gap: 24px; }
+    @media (min-width: 840px) { .grid-2 { grid-template-columns: 1.3fr 0.7fr; } }
+    .summary-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 24px; }
+    .summary-card h3 { font-size: 0.88rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clr-accent); margin-bottom: 14px; }
+    .summary-card p { color: var(--clr-dim); line-height: 1.75; margin-bottom: 10px; }
+
+    /* ── MÓDULOS ── */
+    .modulos-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .modulos-grid { grid-template-columns: 1fr 1fr; } }
+    .modulo-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 22px 24px; display: flex; gap: 16px; align-items: flex-start; }
+    .mod-num { flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--clr-accent); display: flex; align-items: center; justify-content: center; font-family: var(--ff-mono); font-size: 0.72rem; font-weight: 700; color: var(--clr-accent); }
+    .mod-text h4 { font-size: 0.97rem; font-weight: 700; margin-bottom: 5px; }
+    .mod-text p { font-size: 0.87rem; color: var(--clr-dim); line-height: 1.6; margin: 0; }
+
+    /* ── GALERÍA ── */
+    .gallery { margin-top: 56px; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 16px; }
+    @media (min-width: 720px) { .gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .gallery-grid .foto-main { grid-column: 1 / -1; }
+    .photo-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; min-height: 220px; display: flex; flex-direction: column; overflow: hidden; transition: border-color .2s; }
+    .photo-card:hover { border-color: var(--clr-accent); }
+    
+    /* ── DRIVE ── */
+    .drive-panel { margin-top: 48px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); padding: 32px; display: flex; flex-direction: column; gap: 20px; }
+    @media (min-width: 720px) { .drive-panel { flex-direction: row; align-items: center; justify-content: space-between; } }
+    .drive-panel h3 { margin: 0; font-size: 1.35rem; }
+    .drive-panel p { color: var(--clr-dim); line-height: 1.75; max-width: 640px; margin: 0; }
+    .drive-link { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; background: linear-gradient(135deg, rgba(200,169,110,0.95), rgba(255,255,255,0.95)); color: #0b1018; font-weight: 700; font-family: var(--ff-mono); font-size: 0.9rem; text-decoration: none; white-space: nowrap; }
+    .drive-link:hover { opacity: .88; }
+  </style>
+
+  <div class="project-page">
+    <div class="project-inner">
+      <span class="section-label">Curso 2</span>
+      <h1>Manufactura Aditiva y<br><span>Grabado Láser Computarizado</span></h1>
+      <p class="lead">Esta certificación se centró en los fundamentos del modelado paramétrico tridimensional, la calibración de impresoras por filamento y resina, y el control de potencia para grabado de vectores por láser.</p>
+
+      <div class="hero-badges">
+        <span class="hero-badge"><strong>Tecnologías:</strong> FDM, SLA, Grabado Láser</span>
+        <span class="hero-badge"><strong>Formato:</strong> Laboratorio Experimental</span>
+        <span class="hero-badge"><strong>Certificado:</strong> Sí</span>
+      </div>
+
+      <a href="/" class="hero-link">← Volver al inicio</a>
+
+      <section class="section-panel" aria-label="Sobre el curso">
+        <span class="section-label">Descripción</span>
+        <h2>Un enfoque integrado en fabricación digital rápida</h2>
+        <p class="subdesc">El contenido estuvo orientado al diseño mecánico de precisión, la preparación técnica de archivos mediante rebanadores (Slicers) y la experimentación física con materiales de ingeniería.</p>
+
+        <div class="grid-2">
+          <div>
+            <p>Durante el curso aprendí a diferenciar las metodologías de diseño tridimensional, utilizando AutoCAD como entorno base para formas volumétricas y migrando hacia Autodesk Fusion 360 para parametrizar de manera ágil los componentes cinemáticos.</p>
+            <p>Además, revisamos las especificaciones funcionales de impresoras cartesianas de filamento y estaciones químicas de estereolitografía (resina), dominando la manipulación de densidades, orientación de soportes y las configuraciones críticas de velocidad en sistemas CNC de grabado láser.</p>
+          </div>
+          <aside class="summary-card">
+            <h3>Ficha</h3>
+            <p><strong>Institución:</strong> K-Lab — Universidad Mayor de San Andrés (UMSA)</p>
+            <p><strong>Áreas:</strong> Impresión 3D, Diseño Mecánico, CAD / CAM</p>
+            <p><strong>Entrega:</strong> Prototipos funcionales en FDM y SLA</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section-panel" aria-label="Módulos del curso">
+        <span class="section-label">Temario</span>
+        <h2>Módulos que se llevaron</h2>
+        <p class="subdesc">Contenidos cubiertos a lo largo del curso, de lo conceptual a lo aplicado.</p>
+
+        <div class="modulos-grid">
+          <div class="modulo-card">
+            <div class="mod-num">01</div>
+            <div class="mod-text">
+              <h4>Modelado CAD Base y Comparativo</h4>
+              <p>Análisis de flujos de trabajo sobre AutoCAD como base de dibujo vectorial tridimensional e introducción a las ventajas del modelado paramétrico en Autodesk Fusion 360.</p>
+            </div>
+          </div>
+          <div class="modulo-card">
+            <div class="mod-num">02</div>
+            <div class="mod-text">
+              <h4>Características y Anatomía de Impresoras</h4>
+              <p>Revisión estructural de los componentes de hardware que componen impresoras FDM y SLA, analizando boquillas, extrusores, pantallas LCD de exposición y sus mecánicas.</p>
+            </div>
+          </div>
+          <div class="modulo-card">
+            <div class="mod-num">03</div>
+            <div class="mod-text">
+              <h4>Configuración de Impresión 3D y Software</h4>
+              <p>Dominio de softwares laminadores (Slicers) para la correcta preparación de trayectorias G-Code, control de rellenos, retracciones y temperaturas térmicas de sujeción.</p>
+            </div>
+          </div>
+          <div class="modulo-card">
+            <div class="mod-num">04</div>
+            <div class="mod-text">
+              <h4>Parámetros y Calibración del Grabado Láser</h4>
+              <p>Ajuste por software de la potencia de radiación luminosa de la grabadora, control de velocidades por vector y preparación de materiales para grabado superficial.</p>
+            </div>
+          </div>
+          <div class="modulo-card">
+            <div class="mod-num">05</div>
+            <div class="mod-text">
+              <h4>Post-Procesamiento y Mantenimiento de Piezas</h4>
+              <p>Protocolos técnicos de limpieza mediante alcohol isopropílico, técnicas seguras de curado ultravioleta en resinas y remoción controlada de estructuras de soporte.</p>
+            </div>
+          </div>
+          <div class="modulo-card">
+            <div class="mod-num">06</div>
+            <div class="mod-text">
+              <h4>Trabajo final</h4>
+              <p>Impresión física integrada de un conjunto de piezas mecánicas complejas combinando filamento plástico y resinas de alta definición dentro del laboratorio K-Lab.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="gallery" aria-label="Fotos del curso">
+        <span class="section-label">Galería</span>
+        <div class="gallery-grid">
+          <div class="photo-card foto-main">
+            <img src="/images/curso21.jpg" alt="Espacio de trabajo y modelado tridimensional paramétrico" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+          </div>
+          <div class="photo-card">
+            <img src="/images/curso22.jpg" alt="Monitoreo mecánico de extrusores e impresión por deposición fundida" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+          </div>
+          <div class="photo-card">
+            <img src="/images/curso23.jpg" alt="Post-procesamiento y curado controlado de resinas líquidas fotopolímeras" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+          </div>
+          <div class="photo-card">
+            <img src="/images/curso24.jpg" alt="Calibración óptica y operaciones finales de grabado por corte láser" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

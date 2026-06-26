@@ -1,0 +1,39 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+}
+
+const { title = 'Tu Nombre — Portfolio' } = Astro.props;
+---
+<!doctype html>
+<html lang="es" class="transition-colors">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content="Portfolio personal de Tu Nombre: presentación, proyectos, experiencia y contacto." />
+    <ViewTransitions />
+    <script type="module">
+      // Evitar flash blanco: establecer tema antes de que React/JS renderice
+      (function() {
+        try {
+          const stored = localStorage.getItem('theme');
+          if(stored === 'dark') document.documentElement.classList.add('dark');
+          else if(!('theme' in localStorage)) {
+            if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.classList.add('dark');
+          }
+        } catch (e) {
+          console.warn('No se pudo leer localStorage para tema', e);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <main id="view-root" style="contain: paint;">
+      <slot />
+    </main>
+  </body>
+</html>

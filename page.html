@@ -1,0 +1,296 @@
+<!DOCTYPE html><html lang="es" class="transition-colors"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Tu Nombre — Portfolio</title><meta name="description" content="Portfolio personal de Tu Nombre: presentación, proyectos, experiencia y contacto."><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module">
+      // Evitar flash blanco: establecer tema antes de que React/JS renderice
+      (function() {
+        try {
+          const stored = localStorage.getItem('theme');
+          if(stored === 'dark') document.documentElement.classList.add('dark');
+          else if(!('theme' in localStorage)) {
+            if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.classList.add('dark');
+          }
+        } catch (e) {
+          console.warn('No se pudo leer localStorage para tema', e);
+        }
+      })();
+    </script><style data-vite-dev-id="C:/Users/LENOVO/Desktop/BRAZO/web/node_modules/astro/components/ViewTransitions.astro?astro&#38;type=style&#38;index=0&#38;lang.css">/* Route announcer */
+	.astro-route-announcer {
+		position: absolute;
+		left: 0;
+		top: 0;
+		clip: rect(0 0 0 0);
+		clip-path: inset(50%);
+		overflow: hidden;
+		white-space: nowrap;
+		width: 1px;
+		height: 1px;
+	}</style>
+<style data-vite-dev-id="C:/Users/LENOVO/Desktop/BRAZO/web/src/styles/global.css">@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  --clr-ink:      #0d0d0d;
+  --clr-paper:    #f5f2ed;
+  --clr-accent:   #c8a96e;
+  --clr-dim:      rgba(255,255,255,0.55);
+  --clr-overlay1: rgba(10,10,10,0.52);
+  --clr-overlay2: rgba(14,18,26,0.70);
+  --clr-overlay3: rgba(20,14,10,0.60);
+  --ff-body:    'DM Sans', system-ui, sans-serif;
+  --ff-mono:    'DM Mono', 'Courier New', monospace;
+  --fs-label:   0.72rem;
+  --fs-body:    1rem;
+  --fs-lead:    1.2rem;
+  --fs-h2:      2.2rem;
+  --fs-display: clamp(2.8rem, 6vw, 5rem);
+  --radius-card: 12px;
+  --gap-section: clamp(2rem, 5vw, 4rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body { font-family: var(--ff-body); font-size: var(--fs-body); color: var(--clr-ink); background: var(--clr-paper); line-height: 1.65; }
+
+img { display: block; max-width: 100%; }
+
+a { color: inherit; text-decoration: none; }
+
+/* NAV */
+
+.site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 18px clamp(24px, 6vw, 80px); background: transparent; transition: background 0.35s ease, backdrop-filter 0.35s ease; }
+
+.site-nav.scrolled { background: rgba(10,10,10,0.75); backdrop-filter: blur(12px); }
+
+.nav-brand { font-family: var(--ff-mono); font-size: 0.85rem; color: #fff; letter-spacing: 0.08em; text-transform: uppercase; }
+
+.nav-links { display: flex; gap: 32px; list-style: none; }
+
+.nav-links a { font-size: var(--fs-label); font-family: var(--ff-mono); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.75); transition: color 0.2s; }
+
+.nav-links a:hover { color: var(--clr-accent); }
+
+/* SECTIONS */
+
+.section-label { display: inline-block; font-family: var(--ff-mono); font-size: var(--fs-label); letter-spacing: 0.18em; text-transform: uppercase; color: var(--clr-accent); border-bottom: 1px solid var(--clr-accent); padding-bottom: 4px; margin-bottom: 1.2rem; }
+
+.bg-section { background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; }
+
+/* HERO */
+
+#sobre-mi { min-height: 100vh; display: flex; align-items: center; background-image: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); background-size: cover; background-position: center center; background-repeat: no-repeat; background-color: #1a1a2e; }
+
+.hero-overlay { position: absolute; inset: 0; background: var(--clr-overlay1); }
+
+.hero-content { position: relative; z-index: 2; max-width: 780px; padding: clamp(100px, 12vh, 160px) clamp(24px, 8vw, 120px) clamp(60px, 8vh, 100px); }
+
+.hero-content h1 { font-size: var(--fs-display); font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 1rem; }
+
+.hero-content h1 span { color: var(--clr-accent); }
+
+.hero-content p.lead { font-size: var(--fs-lead); color: var(--clr-dim); max-width: 540px; margin-bottom: 2rem; font-weight: 300; }
+
+.hero-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2.4rem; }
+
+.hero-tags span { font-family: var(--ff-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7); border: 1px solid rgba(200,169,110,0.5); padding: 6px 14px; border-radius: 999px; }
+
+.scroll-hint { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.45); font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; }
+
+.scroll-hint::before { content: ''; display: block; width: 1px; height: 40px; background: rgba(255,255,255,0.3); animation: scrollLine 1.8s ease-in-out infinite; }
+
+@keyframes scrollLine { 0%, 100% { opacity: 0.3; transform: scaleY(1); } 50% { opacity: 1; transform: scaleY(1.3); } }
+
+/* EXPERIENCE */
+
+#experiencia { background-image: linear-gradient(135deg, #0e1218 0%, #1a1a2e 100%); background-color: #0e1218; background-attachment: fixed; }
+
+.exp-overlay { position: absolute; inset: 0; background: var(--clr-overlay2); }
+
+.exp-inner { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; padding: var(--gap-section) clamp(24px, 6vw, 80px); }
+
+.sub-heading { font-size: var(--fs-h2); font-weight: 700; color: #fff; margin-bottom: 0.4rem; }
+
+.sub-desc { color: rgba(255,255,255,0.55); font-size: 0.95rem; max-width: 540px; margin-bottom: 2.4rem; }
+
+/* PROJECTS */
+
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: var(--gap-section); }
+
+.project-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(200,169,110,0.2); border-radius: var(--radius-card); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+
+.project-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.5); }
+
+.project-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.2); font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.1em; min-height: 180px; }
+
+.project-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.project-body { padding: 20px 22px 24px; flex: 1; display: flex; flex-direction: column; }
+
+.project-title { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+
+.project-desc { font-size: 0.9rem; color: rgba(255,255,255,0.55); flex: 1; margin-bottom: 16px; }
+
+.project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+
+.project-tags span { font-family: var(--ff-mono); font-size: 0.68rem; color: var(--clr-accent); border: 1px solid rgba(200,169,110,0.4); padding: 3px 9px; border-radius: 999px; }
+
+.project-link { align-self: flex-start; font-family: var(--ff-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--clr-accent); border-bottom: 1px solid rgba(200,169,110,0.4); padding-bottom: 2px; transition: border-color 0.2s, color 0.2s; }
+
+.project-link:hover { color: #fff; border-color: #fff; }
+
+/* COURSES */
+
+.courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: var(--gap-section); }
+
+.course-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-card); overflow: hidden; display: flex; flex-direction: column; transition: background 0.25s ease; }
+
+.course-card:hover { background: rgba(255,255,255,0.08); }
+
+.course-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; background: rgba(255,255,255,0.06); min-height: 140px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.15); font-family: var(--ff-mono); font-size: 0.65rem; }
+
+.course-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.course-body { padding: 16px 18px 20px; flex: 1; display: flex; flex-direction: column; }
+
+.course-institution { font-family: var(--ff-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--clr-accent); margin-bottom: 6px; }
+
+.course-title { font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 8px; }
+
+.course-desc { font-size: 0.85rem; color: rgba(255,255,255,0.5); flex: 1; }
+
+/* TIMELINE */
+
+.timeline { margin-bottom: var(--gap-section); border-left: 1px solid rgba(200,169,110,0.3); padding-left: 28px; display: flex; flex-direction: column; gap: 28px; }
+
+.timeline-item { position: relative; }
+
+.timeline-item::before { content: ''; position: absolute; left: -34px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--clr-accent); border: 2px solid #0e1218; }
+
+.timeline-date { font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+
+.timeline-role { font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
+
+.timeline-company { font-size: 0.9rem; color: var(--clr-accent); margin-bottom: 8px; }
+
+.timeline-body { font-size: 0.9rem; color: rgba(255,255,255,0.5); }
+
+/* CONTACT */
+
+#contacto { background-image: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); background-color: #1a1a2e; background-attachment: fixed; }
+
+.contact-overlay { position: absolute; inset: 0; background: var(--clr-overlay3); }
+
+.contact-inner { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; padding: var(--gap-section) clamp(24px, 6vw, 80px); display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+
+.contact-info h2 { font-size: var(--fs-h2); font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 1rem; }
+
+.contact-info p { color: rgba(255,255,255,0.5); font-size: 0.95rem; margin-bottom: 2rem; }
+
+.social-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+
+.social-list a { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.6); font-size: 0.9rem; transition: color 0.2s; }
+
+.social-list a:hover { color: var(--clr-accent); }
+
+.social-icon { width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; transition: border-color 0.2s; }
+
+.social-list a:hover .social-icon { border-color: var(--clr-accent); }
+
+.contact-form { display: flex; flex-direction: column; gap: 14px; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+.contact-form input, .contact-form textarea { width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 12px 14px; color: #fff; font-family: var(--ff-body); font-size: 0.9rem; outline: none; transition: border-color 0.2s; }
+
+.contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255,255,255,0.3); }
+
+.contact-form input:focus, .contact-form textarea:focus { border-color: var(--clr-accent); }
+
+.contact-form textarea { resize: vertical; min-height: 120px; }
+
+.btn-send { align-self: flex-start; background: var(--clr-accent); color: #0d0d0d; border: none; padding: 13px 32px; border-radius: 8px; font-family: var(--ff-mono); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, transform 0.15s; }
+
+.btn-send:hover { background: #e0c082; transform: translateY(-2px); }
+
+/* FOOTER */
+
+.site-footer { position: relative; z-index: 2; text-align: center; padding: 24px; background: rgba(0,0,0,0.4); font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
+
+/* RESPONSIVE */
+
+@media (max-width: 720px) {
+  .contact-inner { grid-template-columns: 1fr; gap: 36px; }
+  .form-row { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+}
+
+@media (max-width: 500px) {
+  .projects-grid { grid-template-columns: 1fr; }
+  .courses-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-section { background-attachment: scroll; }
+  #sobre-mi { background-attachment: scroll; }
+  #experiencia { background-attachment: scroll; }
+  #contacto { background-attachment: scroll; }
+}
+
+</style><script type="module" src="/node_modules/astro/components/ViewTransitions.astro?astro&type=script&index=0&lang.ts"></script>
+<script type="module" src="/src/components/Navbar.astro?astro&type=script&index=0&lang.ts"></script>
+<script type="module" src="/src/components/DarkToggle.astro?astro&type=script&index=0&lang.ts"></script>
+<script type="module" src="/@vite/client"></script>
+<script type="module" src="/@fs/C:/Users/LENOVO/Desktop/BRAZO/web/node_modules/astro/dist/runtime/client/dev-toolbar/entrypoint.js?v=4f46af53"></script>
+<script>window.__astro_dev_toolbar__ = {"root":"C:\\Users\\LENOVO\\Desktop\\BRAZO\\web\\","version":"4.16.19","debugInfo":"Astro                    v4.16.19\nNode                     v24.14.1\nSystem                   Windows (x64)\nPackage Manager          bun\nOutput                   static\nAdapter                  none\nIntegrations             none"}</script>
+<script type="module" src="/node_modules/astro/components/ViewTransitions.astro?astro&type=style&index=0&lang.css"></script>
+<script type="module" src="/src/styles/global.css"></script></head> <body data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/layouts/BaseLayout.astro" data-astro-source-loc="34:9"> <main id="view-root" style="contain: paint;" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/layouts/BaseLayout.astro" data-astro-source-loc="35:50">  <nav class="site-nav" id="site-nav" aria-label="Navegación principal" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/components/Navbar.astro" data-astro-source-loc="3:71"> <span class="nav-brand" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/components/Navbar.astro" data-astro-source-loc="4:27">Tu Nombre</span> <ul class="nav-links" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/components/Navbar.astro" data-astro-source-loc="5:25"> <li data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/components/Navbar.astro" data-astro-source-loc="6:10"><a href="#sobre-mi" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/components/Navbar.astro" data-astro-source-loc="6:29">Inicio</a></li> <li data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/components/Navbar.astro" data-astro-source-loc="7:10"><a href="#experiencia" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/components/Navbar.astro" data-astro-source-loc="7:32">Experiencia</a></li> <li data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/components/Navbar.astro" data-astro-source-loc="8:10"><a href="#contacto" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/components/Navbar.astro" data-astro-source-loc="8:29">Contacto</a></li> </ul> </nav>  <button id="dark-toggle" aria-label="Toggle dark mode" class="p-2 rounded-md bg-white/30 dark:bg-black/30" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/components/DarkToggle.astro" data-astro-source-loc="3:108"> <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/components/DarkToggle.astro" data-astro-source-loc="4:135"><circle cx="12" cy="12" r="4" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/components/DarkToggle.astro" data-astro-source-loc="4:135"></circle></svg> </button>   <section id="sobre-mi" class="bg-section" aria-label="Sobre mí" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="16:67"> <div class="hero-overlay" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="17:6"></div> <div class="hero-content" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="19:31"> <span class="section-label" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="20:35">Sobre mí</span> <h1 data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="22:11">Hola, soy<br data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="22:21"><span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="22:30">Tu Nombre.</span></h1> <p class="lead" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="24:23">
+Soy [tu especialidad] apasionado/a por [lo que te mueve].
+        Creo que el buen diseño y el código limpio tienen el poder
+        de transformar cómo las personas viven sus días.
+</p> <div class="hero-tags" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="30:30"> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="31:15">HTML &amp; CSS</span> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="32:15">JavaScript</span> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="33:15">React</span> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="34:15">UX / UI</span> </div> <div class="scroll-hint" aria-hidden="true" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="37:51">Desliza para explorar</div> </div> </section>  <section id="experiencia" class="bg-section" aria-label="Experiencia, proyectos y cursos" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="45:93"> <div class="exp-overlay" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="46:6"></div> <div class="exp-inner" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="48:28"> <!-- ── EXPERIENCIA LABORAL ── --> <span class="section-label" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="51:35">Trayectoria</span> <h2 class="sub-heading" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="52:31">Experiencia laboral</h2> <p class="sub-desc" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="53:27">Cada rol me ha dado una perspectiva distinta sobre cómo crear productos que importan.</p> <div class="timeline" role="list" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="55:41"> <div class="timeline-item" role="listitem" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="57:52"> <div class="timeline-date" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="58:38">2022 — Presente</div> <div class="timeline-role" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="59:38">Tu Rol Actual</div> <div class="timeline-company" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="60:41">Empresa Ejemplo</div> <p class="timeline-body" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="61:36">Describe tus responsabilidades principales y los logros más relevantes en este puesto. Sé específico/a sobre el impacto de tu trabajo.</p> </div> <div class="timeline-item" role="listitem" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="64:52"> <div class="timeline-date" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="65:38">2020 — 2022</div> <div class="timeline-role" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="66:38">Rol Anterior</div> <div class="timeline-company" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="67:41">Empresa Anterior</div> <p class="timeline-body" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="68:36">Descripción de responsabilidades y aprendizajes clave de esta etapa profesional.</p> </div> </div> <!-- ── PROYECTOS ── --> <span class="section-label" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="74:35">Trabajo</span> <h2 class="sub-heading" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="75:31">Proyectos</h2> <p class="sub-desc" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="76:27">Selección de proyectos que reflejan mi enfoque y habilidades técnicas.</p> <div class="projects-grid" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="78:34"> <!-- Proyecto 1 --> <article class="project-card" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="81:39"> <div class="project-img" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="82:36"> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="83:19">imagen_proyecto_1.jpg</span> </div> <div class="project-body" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="85:37"> <div class="project-title" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="86:40">Nombre del Proyecto 1</div> <p class="project-desc" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="87:37">
+Describe el proyecto: qué problema resuelve, cuál fue tu rol
+              y cuál fue el resultado final. Sé concreto/a.
+</p> <div class="project-tags" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="91:39"> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="92:21">React</span> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="93:21">Node.js</span> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="94:21">Firebase</span> </div> <a href="https://enlace-del-proyecto-1.com" target="_blank" rel="noopener noreferrer" class="project-link" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="96:120">
+Ver proyecto ↗
+</a> </div> </article> <!-- Proyecto 2 --> <article class="project-card" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="103:39"> <div class="project-img" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="104:36"> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="105:19">imagen_proyecto_2.jpg</span> </div> <div class="project-body" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="107:37"> <div class="project-title" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="108:40">Nombre del Proyecto 2</div> <p class="project-desc" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="109:37">
+Descripción del segundo proyecto: contexto, tecnologías
+              y resultado. Qué aprendiste o qué hiciste distinto aquí.
+</p> <div class="project-tags" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="113:39"> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="114:21">Python</span> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="115:21">Django</span> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="116:21">PostgreSQL</span> </div> <a href="https://enlace-del-proyecto-2.com" target="_blank" rel="noopener noreferrer" class="project-link" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="118:120">
+Ver proyecto ↗
+</a> </div> </article> <!-- Proyecto 3 --> <article class="project-card" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="125:39"> <div class="project-img" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="126:36"> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="127:19">imagen_proyecto_3.jpg</span> </div> <div class="project-body" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="129:37"> <div class="project-title" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="130:40">Nombre del Proyecto 3</div> <p class="project-desc" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="131:37">
+Descripción del tercer proyecto. Puedes mencionar el cliente,
+              el objetivo de negocio y el impacto medible.
+</p> <div class="project-tags" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="135:39"> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="136:21">Figma</span> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="137:21">CSS Grid</span> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="138:21">TypeScript</span> </div> <a href="https://enlace-del-proyecto-3.com" target="_blank" rel="noopener noreferrer" class="project-link" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="140:120">
+Ver proyecto ↗
+</a> </div> </article> <!-- Proyecto 4 --> <article class="project-card" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="147:39"> <div class="project-img" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="148:36"> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="149:19">imagen_proyecto_4.jpg</span> </div> <div class="project-body" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="151:37"> <div class="project-title" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="152:40">Nombre del Proyecto 4</div> <p class="project-desc" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="153:37">
+Cuarto proyecto: describe el contexto, tu contribución específica
+              y los resultados o métricas que lograste.
+</p> <div class="project-tags" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="157:39"> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="158:21">Vue.js</span> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="159:21">Tailwind CSS</span> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="160:21">GraphQL</span> </div> <a href="https://enlace-del-proyecto-4.com" target="_blank" rel="noopener noreferrer" class="project-link" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="162:120">
+Ver proyecto ↗
+</a> </div> </article> <!-- Proyecto 5 --> <article class="project-card" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="169:39"> <div class="project-img" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="170:36"> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="171:19">imagen_proyecto_5.jpg</span> </div> <div class="project-body" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="173:37"> <div class="project-title" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="174:40">Nombre del Proyecto 5</div> <p class="project-desc" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="175:37">
+Descripción del quinto proyecto. Resalta las características
+              principales o innovaciones tecnológicas.
+</p> <div class="project-tags" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="179:39"> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="180:21">Next.js</span> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="181:21">Vercel</span> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="182:21">MDX</span> </div> <a href="https://enlace-del-proyecto-5.com" target="_blank" rel="noopener noreferrer" class="project-link" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="184:120">
+Ver proyecto ↗
+</a> </div> </article> <!-- Proyecto 6 --> <article class="project-card" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="191:39"> <div class="project-img" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="192:36"> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="193:19">imagen_proyecto_6.jpg</span> </div> <div class="project-body" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="195:37"> <div class="project-title" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="196:40">Nombre del Proyecto 6</div> <p class="project-desc" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="197:37">
+Sexto proyecto: contexto, desafíos principales que enfrentaste
+              y cómo los resolviste con tu enfoque técnico.
+</p> <div class="project-tags" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="201:39"> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="202:21">Astro</span> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="203:21">Web Components</span> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="204:21">Netlify</span> </div> <a href="https://enlace-del-proyecto-6.com" target="_blank" rel="noopener noreferrer" class="project-link" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="206:120">
+Ver proyecto ↗
+</a> </div> </article> <!-- Proyecto 7 --> <article class="project-card" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="213:39"> <div class="project-img" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="214:36"> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="215:19">imagen_proyecto_7.jpg</span> </div> <div class="project-body" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="217:37"> <div class="project-title" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="218:40">Nombre del Proyecto 7</div> <p class="project-desc" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="219:37">
+Descripción del séptimo proyecto. Puedes incluir detalles sobre
+              la arquitectura, performance o user experience improvements.
+</p> <div class="project-tags" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="223:39"> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="224:21">Rust</span> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="225:21">WebAssembly</span> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="226:21">Performance</span> </div> <a href="https://enlace-del-proyecto-7.com" target="_blank" rel="noopener noreferrer" class="project-link" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="228:120">
+Ver proyecto ↗
+</a> </div> </article> <!-- Proyecto 8 --> <article class="project-card" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="235:39"> <div class="project-img" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="236:36"> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="237:19">imagen_proyecto_8.jpg</span> </div> <div class="project-body" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="239:37"> <div class="project-title" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="240:40">Nombre del Proyecto 8</div> <p class="project-desc" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="241:37">
+Octavo proyecto: último pero no menos importante. Resalta el
+              aprendizaje clave y cómo cambió tu perspectiva como profesional.
+</p> <div class="project-tags" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="245:39"> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="246:21">Full Stack</span> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="247:21">Cloud</span> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="248:21">DevOps</span> </div> <a href="https://enlace-del-proyecto-8.com" target="_blank" rel="noopener noreferrer" class="project-link" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="250:120">
+Ver proyecto ↗
+</a> </div> </article> </div><!-- /projects-grid --> <!-- ── CURSOS ── --> <span class="section-label" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="259:35">Aprendizaje</span> <h2 class="sub-heading" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="260:31">Cursos y certificaciones</h2> <p class="sub-desc" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="261:27">Formación continua que complementa mi experiencia práctica.</p> <div class="courses-grid" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="263:33"> <article class="course-card" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="265:38"> <div class="course-header" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="266:38"> <div class="course-icon" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="267:38">📚</div> <div class="course-title" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="268:39">Nombre del Curso 1</div> <div class="course-issuer" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="269:40">Plataforma o Institución</div> </div> <p class="course-desc" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="271:34">Descripción breve de lo que aprendiste y cómo aplicas ese conocimiento.</p> </article> <article class="course-card" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="274:38"> <div class="course-header" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="275:38"> <div class="course-icon" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="276:38">🎓</div> <div class="course-title" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="277:39">Nombre del Curso 2</div> <div class="course-issuer" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="278:40">Institución o Plataforma</div> </div> <p class="course-desc" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="280:34">Descripción breve de lo que aprendiste y cómo aplicas ese conocimiento.</p> </article> <article class="course-card" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="283:38"> <div class="course-header" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="284:38"> <div class="course-icon" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="285:38">💡</div> <div class="course-title" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="286:39">Nombre del Curso 3</div> <div class="course-issuer" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="287:40">Plataforma de Educación</div> </div> <p class="course-desc" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="289:34">Descripción breve de lo que aprendiste y cómo aplicas ese conocimiento.</p> </article> <article class="course-card" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="292:38"> <div class="course-header" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="293:38"> <div class="course-icon" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="294:38">🏆</div> <div class="course-title" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="295:39">Nombre del Curso 4</div> <div class="course-issuer" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="296:40">Institución u Organizador</div> </div> <p class="course-desc" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="298:34">Descripción breve de lo que aprendiste y cómo aplicas ese conocimiento.</p> </article> </div><!-- /courses-grid --> </div><!-- /exp-inner --> </section>  <section id="contacto" class="bg-section" aria-label="Contacto" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="310:67"> <div class="contact-overlay" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="311:6"></div> <div class="contact-inner" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="313:32"> <!-- Info + redes --> <div class="contact-info" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="316:33"> <span class="section-label" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="317:37">Contacto</span> <h2 data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="318:13">Hablemos.</h2> <p data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="319:12">¿Tienes un proyecto en mente o quieres explorar cómo colaborar? Escríbeme directamente o usa el formulario.</p> <ul class="social-list" aria-label="Redes sociales" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="321:61"> <li data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="322:15"> <a href="mailto:tucorreo@ejemplo.com" aria-label="Correo electrónico" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="323:83"> <span class="social-icon" aria-hidden="true" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="324:60">✉</span>
+tucorreo@ejemplo.com
+</a> </li> <li data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="328:15"> <a href="https://linkedin.com/in/tu-perfil" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="329:121"> <span class="social-icon" aria-hidden="true" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="330:60">🔗</span>
+LinkedIn
+</a> </li> <li data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="334:15"> <a href="https://github.com/tu-usuario" target="_blank" rel="noopener noreferrer" aria-label="GitHub" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="335:115"> <span class="social-icon" aria-hidden="true" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="336:60">⚙</span>
+GitHub
+</a> </li> <li data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="340:15"> <a href="https://twitter.com/tu-usuario" target="_blank" rel="noopener noreferrer" aria-label="Twitter" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="341:117"> <span class="social-icon" aria-hidden="true" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="342:60">🐦</span>
+Twitter
+</a> </li> </ul> </div> <!-- Formulario --> <div class="contact-form-wrapper" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="350:41"> <form class="contact-form" action="#" method="post" novalidate data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="351:72"> <div class="form-row" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="352:33"> <input type="text" name="nombre" placeholder="Tu nombre" required data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="353:14"> <input type="email" name="email" placeholder="Tu email" required data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="354:14"> </div> <input type="text" name="asunto" placeholder="Asunto" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="356:12"> <textarea name="mensaje" placeholder="Cuéntame sobre tu proyecto o idea…" required data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="357:12"></textarea> <button type="submit" class="btn-send" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/pages/index.astro" data-astro-source-loc="358:50">Enviar mensaje</button> </form> </div> </div> </section> <footer class="site-footer" data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/components/Footer.astro" data-astro-source-loc="3:29"> <span data-astro-source-file="C:/Users/LENOVO/Desktop/BRAZO/web/src/components/Footer.astro" data-astro-source-loc="4:9">Hecho por Tu Nombre — Reemplaza este texto cuando publiques</span> </footer>  </main> </body></html>

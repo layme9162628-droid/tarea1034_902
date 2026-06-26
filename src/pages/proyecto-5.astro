@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout title="Curso 1">
+
+  <style>
+    :root {
+      --clr-accent: #c8a96e;
+      --clr-dim: rgba(255,255,255,0.78);
+      --clr-surface: rgba(255,255,255,0.06);
+      --clr-border: rgba(255,255,255,0.1);
+      --ff-body: 'DM Sans', system-ui, sans-serif;
+      --ff-mono: 'DM Mono', 'Courier New', monospace;
+      --radius: 18px;
+    }
+
+    .project-page { position: relative; min-height: 100vh; padding: clamp(100px, 12vh, 140px) 24px 80px; background: linear-gradient(135deg, #101626 0%, #0a1220 100%); color: #fff; font-family: var(--ff-body); overflow: hidden; }
+    .project-page::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(200,169,110,0.17), transparent 22%), radial-gradient(circle at left center, rgba(255,255,255,0.04), transparent 16%); pointer-events: none; }
+    .project-inner { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; }
+    .section-label { display: inline-block; font-family: var(--ff-mono); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--clr-accent); border-bottom: 1px solid var(--clr-accent); padding-bottom: 4px; margin-bottom: 1.2rem; }
+    h1 { font-size: clamp(2.8rem, 6vw, 4.2rem); line-height: 1.05; font-weight: 700; margin-bottom: 1rem; }
+    h1 span { display: inline-block; color: var(--clr-accent); }
+    .lead { max-width: 720px; font-size: 1.12rem; line-height: 1.85; color: var(--clr-dim); margin-bottom: 2.4rem; }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2.8rem; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 12px 16px; border-radius: 999px; background: var(--clr-surface); border: 1px solid var(--clr-border); font-family: var(--ff-mono); font-size: 0.78rem; letter-spacing: 0.1em; }
+    .hero-badge strong { color: var(--clr-accent); }
+    .hero-link { display: inline-flex; align-items: center; gap: 8px; font-family: var(--ff-mono); font-size: 0.78rem; letter-spacing: 0.1em; color: var(--clr-accent); border-bottom: 1px solid rgba(200,169,110,0.4); }
+    .section-panel { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 32px; margin-top: 56px; }
+    .section-panel h2 { font-size: clamp(1.7rem, 3vw, 2rem); margin-bottom: 1rem; }
+    .subdesc { color: var(--clr-dim); font-size: 0.95rem; line-height: 1.75; margin-bottom: 2rem; max-width: 700px; }
+    .grid-2 { display: grid; gap: 24px; }
+    @media (min-width: 840px) { .grid-2 { grid-template-columns: 1.3fr 0.7fr; } }
+    .summary-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 24px; }
+    .summary-card h3 { font-size: 0.88rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clr-accent); margin-bottom: 14px; }
+    .summary-card p { color: var(--clr-dim); line-height: 1.75; margin-bottom: 10px; }
+
+    /* ── MÓDULOS ── */
+    .modulos-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .modulos-grid { grid-template-columns: 1fr 1fr; } }
+    .modulo-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 22px 24px; display: flex; gap: 16px; align-items: flex-start; }
+    .mod-num { flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--clr-accent); display: flex; align-items: center; justify-content: center; font-family: var(--ff-mono); font-size: 0.72rem; font-weight: 700; color: var(--clr-accent); }
+    .mod-text h4 { font-size: 0.97rem; font-weight: 700; margin-bottom: 5px; }
+    .mod-text p { font-size: 0.87rem; color: var(--clr-dim); line-height: 1.6; margin: 0; }
+
+    /* ── GALERÍA ── */
+    .gallery { margin-top: 56px; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 16px; }
+    @media (min-width: 720px) { .gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .gallery-grid .foto-main { grid-column: 1 / -1; }
+    .photo-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; min-height: 220px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 12px; transition: border-color .2s; }
+    .photo-card:hover { border-color: var(--clr-accent); }
+    .photo-card .photo-icon { font-size: 2.4rem; }
+    .photo-card span { color: var(--clr-dim); font-size: 0.92rem; }
+    /* Cuando tengas fotos reales reemplaza el contenido de cada .photo-card por:
+       <img src="/img/curso1-a.jpg" alt="..." style="width:100%;height:100%;object-fit:cover;border-radius:10px;"> */
+
+    /* ── DRIVE ── */
+    .drive-panel { margin-top: 48px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); padding: 32px; display: flex; flex-direction: column; gap: 20px; }
+    @media (min-width: 720px) { .drive-panel { flex-direction: row; align-items: center; justify-content: space-between; } }
+    .drive-panel h3 { margin: 0; font-size: 1.35rem; }
+    .drive-panel p { color: var(--clr-dim); line-height: 1.75; max-width: 640px; margin: 0; }
+    .drive-link { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; background: linear-gradient(135deg, rgba(200,169,110,0.95), rgba(255,255,255,0.95)); color: #0b1018; font-weight: 700; font-family: var(--ff-mono); font-size: 0.9rem; text-decoration: none; white-space: nowrap; }
+    .drive-link:hover { opacity: .88; }
+  </style>
+<div class="project-page">
+    <div class="project-inner">
+      <span class="section-label">Curso 1</span>
+      <h1>Tecnología, Pilotaje y<br><span>Procesamiento con Drones</span></h1>
+      <p class="lead">Esta certificación se centró en los fundamentos de la aerodinámica, el ensamblaje de aeronaves, la simulación de vuelo y el análisis avanzado de imágenes obtenidas mediante sensores remotos.</p>
+
+      <div class="hero-badges">
+        <span class="hero-badge"><strong>Duración:</strong> 40 hrs</span>
+        <span class="hero-badge"><strong>Modalidad:</strong> Presencial / Práctico</span>
+        <span class="hero-badge"><strong>Certificado:</strong> Sí</span>
+      </div>
+
+      <a href="/" class="hero-link">← Volver al inicio</a>
+
+      <!-- ── DESCRIPCIÓN ── -->
+      <section class="section-panel" aria-label="Sobre el curso">
+        <span class="section-label">Descripción</span>
+        <h2>Un enfoque práctico en sistemas autónomos aéreos</h2>
+        <p class="subdesc">El contenido estuvo orientado al diseño mecánico, la simulación de navegación y la teledetección fotográfica en entornos de campo abierto reales.</p>
+
+        <div class="grid-2">
+          <div>
+            <p>Durante el curso aprendí a comprender y aplicar los principios fundamentales de la física aérea y aerodinámica, identificando de manera precisa la arquitectura interna, sensores y actuadores de plataformas comerciales avanzadas como el DJI Mini 4K.</p>
+            <p>Además, revisamos el procesamiento digital de imágenes para interpretar espectros lumínicos de objetos, planificar rutas de navegación autónoma y dominar los controles en simuladores de vuelo especializados antes de las operaciones de campo.</p>
+          </div>
+          <aside class="summary-card">
+            <h3>Ficha</h3>
+            <p><strong>Institución:</strong> K-Lab</p>
+            <p><strong>Áreas:</strong> Aeronáutica, Visión Computacional, Robótica</p>
+            <p><strong>Instructor:</strong> Ing. Karel Gomez / Ing. Perez</p>
+            <p><strong>Entrega:</strong> Rutas con DJI mini 4k</p>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ── MÓDULOS ── -->
+      <section class="section-panel" aria-label="Módulos del curso">
+        <span class="section-label">Temario</span>
+        <h2>Módulos que se llevaron</h2>
+        <p class="subdesc">Contenidos cubiertos a lo largo del curso, de lo conceptual a lo aplicado.</p>
+
+        <div class="modulos-grid">
+          <div class="modulo-card">
+            <div class="mod-num">01</div>
+            <div class="mod-text">
+              <h4>Física Aérea y Aerodinámica</h4>
+              <p>Estudio de los principios mecánicos que rigen el vuelo de aeronaves no tripuladas, sustentación, fuerzas dinámicas y estabilidad en entornos variables.</p>
+            </div>
+          </div>
+          <div class="modulo-card">
+            <div class="mod-num">02</div>
+            <div class="mod-text">
+              <h4>Arquitectura, Componentes y Montaje</h4>
+              <p>Montado paso a paso de drones e identificación de subsistemas esenciales: actuadores (motores, hélices), sensores de posicionamiento e instrumentación a bordo.</p>
+            </div>
+          </div>
+          <div class="modulo-card">
+            <div class="mod-num">03</div>
+            <div class="mod-text">
+              <h4>Análisis y Componentes del DJI Mini 4K</h4>
+              <p>Desglose técnico de un sistema comercial avanzado, evaluando sus sensores ópticos, de estabilidad y el rendimiento de sus actuadores mecánicos en vuelo.</p>
+            </div>
+          </div>
+          <div class="modulo-card">
+            <div class="mod-num">04</div>
+            <div class="mod-text">
+              <h4>Procesamiento de Imágenes y Espectros</h4>
+              <p>Tratamiento computacional de capturas aéreas e interpretación de los espectros electromagnéticos de la luz sobre objetos para análisis agronómicos o topográficos.</p>
+            </div>
+          </div>
+          <div class="modulo-card">
+            <div class="mod-num">05</div>
+            <div class="mod-text">
+              <h4>Control Electrónico y Simulación de Manejo</h4>
+              <p>Entrenamiento interactivo en simuladores de software para dominar la dinámica de control de vuelo, respuesta de palancas y prevención de colisiones.</p>
+            </div>
+          </div>
+          <div class="modulo-card">
+            <div class="mod-num">06</div>
+            <div class="mod-text">
+              <h4>Trabajo final</h4>
+              <p>Planificación de rutas de vuelo autónomas ejecutadas en campo abierto, aplicando mapeo georreferenciado y despliegue real de la aeronave para validación empírica.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── GALERÍA ── -->
+      <section class="gallery" aria-label="Fotos del curso">
+        <span class="section-label">Galería</span>
+        <div class="gallery-grid">
+          <!-- foto principal ancha -->
+          <div class="photo-card foto-main">
+            <img src="/images/curso11.jpg" alt="Actividad principal con drones" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+          </div>
+          <div class="photo-card">
+            <img src="/images/curso12.jpg" alt="Montaje e ingeniería del dron" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+          </div>
+          <div class="photo-card">
+            <img src="/images/curso13.jpg" alt="Simulación de vuelo y software" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+          </div>
+          <div class="photo-card">
+            <img src="/images/curso14.jpg" alt="Operación en campo abierto" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+          </div>
+        </div>
+      </section>
+
+
+
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

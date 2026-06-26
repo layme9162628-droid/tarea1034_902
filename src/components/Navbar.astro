@@ -1,0 +1,19 @@
+---
+---
+<nav class="site-nav" id="site-nav" aria-label="Navegación principal">
+  <span class="nav-brand">Mi Nombre</span>
+  <ul class="nav-links">
+    <li><a href="#sobre-mi">Inicio</a></li>
+    <li><a href="#experiencia">Experiencia</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<script>
+  (function() {
+    const nav = document.getElementById('site-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+  })();
+</script>

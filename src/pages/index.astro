@@ -1,0 +1,415 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import DarkToggle from '../components/DarkToggle.astro';
+
+const basePath = (import.meta.env.PUBLIC_BASE || '/').replace(/\/?$/, '/');
+---
+<BaseLayout title="Mi Nombre — Portfolio">
+  <Navbar />
+  <!-- <DarkToggle /> -->
+<section id="sobre-mi" class="bg-section" aria-label="Sobre mí">
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content hero-content--split">
+
+    <!-- columna izquierda: texto -->
+    <div class="hero-text">
+      <!-- Un toque de estilo extra a la etiqueta superior -->
+      <div class="label-container">
+        <span class="section-label">Sobre mí</span>
+      </div>
+
+      <h1 class="hero-title">Hola, soy<br><span>Domingo Fabio Layme Patzi</span></h1>
+
+      <p class="lead" style="text-align: justify; color: rgba(255,255,255,0.85); margin-bottom: 0.5rem;">
+        Soy estudiante de noveno semestre de Ingeniería Electrónica en la Universidad Mayor de San Andrés, con enfoque en Automatización y Control (PLC, HMI, SCADA) y desarrollo de software en Python, C/C++, JavaScript, MATLAB y tecnologías web. Complemento mi perfil técnico con formación en pilotaje de drones, manufactura aditiva (impresión 3D y resina) e idiomas.
+      </p>
+
+      <div class="hero-tags">
+        <span>HTML &amp; CSS</span>
+        <span>JavaScript</span>
+        <span>C/C++</span>
+        <span>Python</span>
+        <span>PLC &amp; HMI</span>
+        <span>SCADA</span>
+      </div>
+
+      <div class="scroll-hint" aria-hidden="true">Desliza para explorar</div>
+    </div>
+
+    <!-- columna derecha: grid 2×2 de fotos -->
+    <div class="hero-photos">
+      <div class="hero-photo-grid">
+        <div class="hero-photo-slot">
+          <img src="/images/foto1.jpg" alt="Foto 1">
+        </div>
+        <div class="hero-photo-slot">
+          <img src="/images/foto2.jpg" alt="Foto 2">
+        </div>
+        <div class="hero-photo-slot">
+          <img src="/images/fotos3.jpg" alt="Foto 3">
+        </div>
+        <div class="hero-photo-slot">
+          <img src="/images/fotos4.jpg" alt="Foto 4">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* ── Ajustes de orden superior ── */
+  .label-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: -0.5rem; /* Acerca la etiqueta "Sobre mí" al título principal */
+  }
+
+  .section-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--clr-accent);
+    font-weight: 600;
+    position: relative;
+  }
+
+  /* ── layout split hero ── */
+  .hero-content--split {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 40px 20px; /* Más padding arriba para dar aire respecto a la barra de navegación */
+  }
+
+  @media (min-width: 900px) {
+    .hero-content--split {
+      flex-direction: row;
+      align-items: center;   
+      gap: 60px;
+    }
+
+    .hero-text {
+      flex: 1 1 50%;         
+    }
+
+    .hero-photos {
+      flex: 1 1 50%;         
+    }
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem; /* Espaciado más compacto y ordenado entre elementos */
+  }
+
+  .hero-photos {
+    width: 100%;
+  }
+
+  .hero-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(180px, 1fr); 
+    gap: 16px;
+    width: 100%;
+  }
+
+  @media (min-width: 900px) {
+    .hero-photo-grid {
+      grid-auto-rows: minmax(240px, 1fr); 
+    }
+  }
+
+  .hero-photo-slot {
+    border-radius: 24px; 
+    overflow: hidden;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: border-color .3s, transform .3s, box-shadow .3s;
+    aspect-ratio: 1 / 1; 
+  }
+
+  .hero-photo-slot:hover {
+    border-color: var(--clr-accent); 
+    transform: translateY(-5px);    
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  }
+
+  .hero-photo-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+  }
+
+  .hero-title {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    line-height: 1.15;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .hero-title span {
+    color: var(--clr-accent);
+  }
+</style>
+  <!-- ═══════════════════════════════════════════
+       SECCIÓN 2 — PROYECTOS / CURSOS
+  ═══════════════════════════════════════════ -->
+  <section id="experiencia" class="bg-section" aria-label="Proyectos y cursos">
+    <div class="exp-overlay"></div>
+
+    <div class="exp-inner">
+
+      <!-- ── PROYECTOS ── -->
+      <span class="section-label">Trabajo</span>
+      <h2 class="sub-heading">Proyectos</h2>
+      <p class="sub-desc">Una selección de proyectos desarrollados a lo 
+        largo de mi formación académica, enfocados
+         en la automatización de procesos, desarrollo de software y sistemas de control. 
+         Cada uno representa la aplicación práctica de la teoría a soluciones del mundo real.</p>
+
+      <div class="projects-grid">
+
+        <!-- Proyecto 1 -->
+        <article class="project-card">
+          <div class="project-img">
+            <img src="/images/proyecto1_index.jpeg" alt="Detector de números primos" />
+          </div>
+          <div class="project-body">
+            <div class="project-title">Detector de numeros primos</div>
+            <p class="project-desc">
+              El problema que este proyecto busca abordar es el diseño e implementación
+              eficiente de un detector de números primos utilizando circuitos integrados
+              en un entorno de procesamiento serial. La investigación se centrará en optimizar
+              el rendimiento del sistema, maximizando la utilización de recursos disponibles 
+              y garantizando precisión y fiabilidad en la detección y generación de números
+              primos.
+
+            </p>
+              <div class="project-tags">
+                <span>Proteus VSM</span>
+                <span>Electrónica Digital</span>
+                <span>Sistemas Secuenciales</span>
+                <span>Lógica Combinacional</span>
+                <span>Circuitos Integrados</span>
+              </div>
+            <a href={`${basePath}proyecto-1`} class="project-link">
+              Ver proyecto ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- Proyecto 2 -->
+        <article class="project-card">
+          <div class="project-img">
+            <img src="/images/proyecto2_index.jpeg" alt="Electrocardiófono" />
+          </div>
+          <div class="project-body">
+            <div class="project-title">ELECTROCARDIOFONO</div>
+            <p class="project-desc">
+              El presente proyecto tiene como obje-
+              tivo diseñar y construir un electrocardiófono utilizando componentes electrónicos básicos,
+              como resistencias, capacitores, amplificadores operacionales y electrodos. Este dispositivo
+              no solo permite la visualización de las señales del corazón, sino también su conversión en
+              señales auditivas, facilitando su interpretación.
+             
+            </p>
+                <div class="project-tags">
+                  <span>Electrónica Analógica</span>
+                  <span>Instrumentación Biomédica</span>
+                  <span>Amplificadores Operacionales</span>
+                  <span>Procesamiento de Señales</span>
+                  <span>Proteus / Multisim</span>
+                </div>
+            <a href={`${basePath}proyecto-2`} class="project-link">
+              Ver proyecto ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- Proyecto 3 -->
+        <article class="project-card">
+          <div class="project-img">
+            <img src="/images/proyecto3_index.jpeg" alt="Grúa clasificadora de cubos" />
+          </div>
+          <div class="project-body">
+            <div class="project-title">Grúa controlada por microcontrolador capaz de clasificar cubos de colores</div>
+            <p class="project-desc">
+              Este proyecto consiste en un sistema automatizado de clasificación y transporte
+              de objetos mediante una grúa controlada por un microcontrolador. 
+              El objetivo principal es identificar cubos de colores (rojo, amarillo y verde)
+              colocados sobre una cinta transportadora, para luego trasladarlos 
+              hacia contenedores específicos según su color. La detección se realiza mediante
+              una cámara web, que envía la información al microcontrolador, 
+              el cual coordina los movimientos de la grúa y la cinta para completar 
+              el proceso de manera autónoma.
+            </p>
+              <div class="project-tags">
+                <span>ESP32 / Arduino</span>
+                <span>Python (OpenCV)</span>
+                <span>Visión Artificial</span>
+                <span>Servomotores &amp; PAP</span>
+                <span>Diseño 3D (CAD)</span>
+              </div>
+            <a href={`${basePath}proyecto-3`} class="project-link">
+              Ver proyecto ↗
+            </a>
+          </div>
+        </article>
+
+      </div><!-- /projects-grid -->
+
+      <!-- ── CURSOS ── -->
+      <span class="section-label">Aprendizaje</span>
+      <h2 class="sub-heading">Cursos realizados</h2>
+      <p class="sub-desc">Trayectoria académica complementaria enfocada en la adquisición de 
+        nuevas competencias tecnológicas. Una selección de los cursos y 
+        programas que respaldan mi capacidad para adaptarme a las demandas 
+        de la industria actual.</p>
+
+      <div class="projects-grid">
+
+        <!-- Curso 1 -->
+        <article class="project-card">
+          <div class="project-img">
+            <img src="/images/curso1_index.jpeg" alt="Manejo de Drones" />
+          </div>
+          <div class="project-body">
+            <div class="project-title">Manejo de Drones, procesamiento de Imágenes y captura Area</div>
+            <p class="project-desc">
+            La integración de la tecnología de drones con la captura aérea y el procesamiento de imágenes
+            representa una de las herramientas más vanguardistas en la ingeniería moderna para la 
+            recolección y análisis de datos geoespaciales y estructurales. A través de la planificación
+            y ejecución de vuelos autónomos y manuales, es posible adquirir
+            perspectivas aéreas de alta resolución que antes eran costosas o inaccesibles.            </p>
+            <div class="project-tags">
+              <span>UMSA</span>
+              <span>MYONGJI COLLEGE</span>
+              <span>K-LAB</span>
+            </div>
+            <a href={`${basePath}proyecto-5`} class="project-link">
+              Ver curso ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- Curso 2 -->
+        <article class="project-card">
+          <div class="project-img">
+            <img src="/images/curso2_index.jpg" alt="Impresión 3D, Resina y Láser" />
+          </div>
+          <div class="project-body">
+            <div class="project-title">Impresión en 3D, Resina y grabado de Laser</div>
+            <p class="project-desc">
+              Dominio de manufactura aditiva en filamento (FDM) y resina (SLA), pilares clave para el desarrollo ágil de hardware y prototipado mecatrónico. Tengo experiencia en la optimización de piezas (análisis de esfuerzos, colocación de soportes y orientación) y en procesos de postprocesamiento térmico y UV, logrando desde componentes estructurales robustos hasta acabados de alta precisión milimétrica.
+            </p>            <div class="project-tags">
+              <span>UMSA</span>
+              <span>MYONGJI COLLEGE</span>
+              <span>K-LAB</span>
+            </div>
+            <a href={`${basePath}proyecto-6`} class="project-link">
+              Ver curso ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- Curso 3 -->
+        <article class="project-card">
+          <div class="project-img">
+            <img src="/images/curso3_index.jpeg" alt="Curso de Idioma Chino" />
+          </div>
+          <div class="project-body">
+            <div class="project-title">Curso de Idioma Chino</div>
+            <p class="project-desc">
+          El aprendizaje del idioma chino representa una de las ventajas estratégicas más competitivas
+          en el panorama de la ingeniería moderna y el desarrollo tecnológico global. Siendo China el 
+          epicentro de la manufactura electrónica, la producción de semiconductores, el desarrollo de 
+          hardware y la innovación en automatización industrial, el dominio de esta lengua abre un 
+          canal de comunicación directo con proveedores, 
+          fabricantes y centros de investigación de vanguardia.           
+            </p>
+            <div class="project-tags">
+              <span>UMSA</span>
+              <span>Carrera de Linguistica</span>
+            </div>
+            <a href={`${basePath}proyecto-7`} class="project-link">
+              Ver curso ↗
+            </a>
+          </div>
+        </article>
+
+      </div><!-- /courses-grid -->
+
+    </div><!-- /exp-inner -->
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SECCIÓN 3 — CONTACTO
+  ═══════════════════════════════════════════ -->
+  <section id="contacto" class="bg-section" aria-label="Contacto">
+    <div class="contact-overlay"></div>
+ 
+    <div class="contact-inner">
+ 
+      <!-- Info + redes -->
+      <div class="contact-info">
+        <span class="section-label">Contacto</span>
+        <h2>Hablemos.</h2>
+        <p>¿Tienes un proyecto en mente o quieres explorar cómo colaborar? Escríbeme directamente o usa el formulario.</p>
+ 
+        <ul class="social-list" aria-label="Redes sociales">
+          <li>
+            <a href="mailto:layme.9162628@gmail.com" aria-label="Correo electrónico">
+              <span class="social-icon" aria-hidden="true">✉</span>
+              layme.9162628@gmail.com
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/59177249118" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+              <span class="social-icon" aria-hidden="true">💬</span>
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/layme9162628-droide" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <span class="social-icon" aria-hidden="true">⚙</span>
+              GitHub
+            </a>
+          </li>
+          <li>
+            <a href="https://instagram.com/fxbx_7u7_" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <span class="social-icon" aria-hidden="true">📸</span>
+              Instagram
+            </a>
+          </li>
+        </ul>
+      </div>
+ 
+      <!-- Formulario -->
+      <div class="contact-form-wrapper">
+        <form class="contact-form" action="#" method="post" novalidate>
+          <div class="form-row">
+            <input type="text"  name="nombre"  placeholder="Tu nombre"  required>
+            <input type="email" name="email"   placeholder="Tu email"   required>
+          </div>
+          <input type="text"    name="asunto"  placeholder="Asunto">
+          <textarea             name="mensaje" placeholder="Cuéntame sobre tu proyecto o idea…" required></textarea>
+          <button type="submit" class="btn-send">Enviar mensaje</button>
+        </form>
+      </div>
+ 
+    </div>
+ 
+  </section>
+
+  <Footer />
+</BaseLayout>

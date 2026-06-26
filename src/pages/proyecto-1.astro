@@ -1,0 +1,240 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout title="Proyecto 1">
+
+  <style>
+    :root {
+      --clr-accent: #c8a96e;
+      --clr-dim: rgba(255,255,255,0.75);
+      --clr-bg: #0f1724;
+      --clr-surface: rgba(255,255,255,0.05);
+      --clr-border: rgba(255,255,255,0.1);
+      --radius-card: 18px;
+      --ff-body: 'DM Sans', system-ui, sans-serif;
+      --ff-mono: 'DM Mono', 'Courier New', monospace;
+    }
+
+    .project-page * { box-sizing: border-box; }
+    .project-page { font-family: var(--ff-body); background: linear-gradient(135deg, #111827 0%, #0a1220 100%); color: #fff; min-height: 100vh; position: relative; }
+    .project-page a { color: inherit; text-decoration: none; }
+    .project-page::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(200,169,110,0.16), transparent 24%), radial-gradient(circle at left bottom, rgba(255,255,255,0.05), transparent 14%); pointer-events: none; }
+    .project-inner { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: clamp(100px, 12vh, 140px) 24px 80px; }
+
+    .section-label { display: inline-block; font-family: var(--ff-mono); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--clr-accent); border-bottom: 1px solid var(--clr-accent); padding-bottom: 4px; margin-bottom: 1.2rem; }
+    h1 { font-size: clamp(2.8rem, 6vw, 4.3rem); line-height: 1.05; margin-bottom: 1rem; font-weight: 700; }
+    h1 em { font-style: normal; color: transparent; -webkit-text-stroke: 1px var(--clr-accent); }
+    .lead { max-width: 680px; font-size: 1.15rem; line-height: 1.8; color: var(--clr-dim); margin-bottom: 2rem; }
+
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2.5rem; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; font-family: var(--ff-mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 12px 16px; border-radius: 999px; background: var(--clr-surface); border: 1px solid var(--clr-border); }
+    .btn-back { display: inline-flex; align-items: center; gap: 8px; font-family: var(--ff-mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--clr-accent); border-bottom: 1px solid rgba(200,169,110,0.5); }
+
+    .section-panel { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-card); padding: 32px; }
+    .section-panel h2 { font-size: clamp(1.7rem, 3vw, 2rem); margin-bottom: 1rem; }
+    .subdesc { color: var(--clr-dim); font-size: 0.95rem; line-height: 1.8; margin-bottom: 2rem; max-width: 700px; }
+    .grid-2 { display: grid; gap: 24px; }
+    @media (min-width: 780px) { .grid-2 { grid-template-columns: 1.3fr 0.7fr; } }
+    .summary-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-card); padding: 24px; }
+    .summary-card h3 { font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clr-accent); margin-bottom: 16px; }
+    .summary-card p { color: var(--clr-dim); line-height: 1.75; margin-bottom: 10px; }
+    .pill-list { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .pill { display: inline-flex; align-items: center; font-family: var(--ff-mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 14px; border-radius: 999px; color: #fff; background: rgba(200,169,110,0.12); border: 1px solid rgba(200,169,110,0.2); }
+
+    /* ── GALERÍA ── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .gallery-grid .foto-main { grid-column: 1 / -1; }
+    .foto-slot {
+      aspect-ratio: 16/9;
+      border-radius: var(--radius-card);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+      color: rgba(255,255,255,0.3);
+      font-family: var(--ff-mono);
+      font-size: 0.75rem;
+      transition: border-color .2s, transform .2s;
+    }
+    .foto-slot:hover { border-color: var(--clr-accent); transform: scale(1.012); }
+    .foto-slot .ficon { font-size: 2rem; opacity: .35; }
+    /* Cuando tengas fotos reales reemplaza el contenido por:
+       <img src="/img/proyecto1-a.jpg" alt="..." style="width:100%;height:100%;object-fit:cover;"> */
+
+    /* ── DRIVE CTA ── */
+    .drive-banner {
+      margin-top: 40px;
+      background: rgba(200,169,110,0.07);
+      border: 1px solid rgba(200,169,110,0.25);
+      border-radius: var(--radius-card);
+      padding: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .drive-banner-text h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .drive-banner-text p {
+      font-size: 0.9rem;
+      color: var(--clr-dim);
+      max-width: 420px;
+      line-height: 1.6;
+    }
+    .btn-drive {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--clr-accent);
+      color: #0a1220;
+      font-family: var(--ff-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      border-radius: 999px;
+      transition: opacity .2s, transform .15s;
+      white-space: nowrap;
+    }
+    .btn-drive:hover { opacity: .85; transform: translateY(-2px); }
+  </style>
+
+  <div class="project-page">
+    <div class="project-inner">
+      <span class="section-label">números primos de hasta 8 bits</span>
+      <h1>Detector de numeros <br><em>primos</em></h1>
+      <p class="lead">Este proyecto tiene como objetivo general diseñar e implementar un sistema
+         digital en hardware para la detección eficiente de números primos de hasta 8 bits, 
+         aplicando algoritmos matemáticos optimizados. A través de la investigación de métodos 
+         avanzados adecuados para hardware digital y la simulación del circuito, se busca evaluar
+         el rendimiento del sistema en términos de precisión y optimización de recursos, 
+         permitiendo además contrastar esta solución secuencial con métodos tradicionales
+         para identificar sus ventajas y limitaciones técnicas.</p>
+
+      <div class="hero-badges">
+        <span class="hero-badge">Proteus VSM</span>
+        <span class="hero-badge">Electrónica Digital</span>
+        <span class="hero-badge">Sistemas Secuenciales</span>
+        <span class="hero-badge">Lógica Combinacional</span>
+        <span class="hero-badge">Circuitos Integrados</span>  
+      </div>
+
+      <a href="/" class="btn-back">← Volver al inicio</a>
+
+      <section class="section-panel" aria-label="Descripción del proyecto" style="margin-top: 60px;">
+        <span class="section-label">Resumen</span>
+        <h2>Un sistema de deteccion de numeros primos de 8bits para un escalamiento de numeros primos de 20 bits</h2>
+        <p class="subdesc">Este proyecto propone el diseño e implementación de un sistema basado en hardware dedicado
+           a la detección eficiente de números primos, un concepto matemático crítico para el desarrollo de la criptografía
+            moderna y la optimización computacional. Inspirado en métodos tradicionales como la Criba de Eratóstenes,
+             el sistema traslada los principios lógicos directamente al diseño digital secuencial, utilizando componentes
+              integrados como registros de desplazamiento (PISO y SIPO) y restadores seriales.</p>
+
+        <div class="grid-2">
+          <div>
+            <p>El planteamiento del problema aborda la necesidad de optimizar el rendimiento y maximizar la utilización de
+              recursos en sistemas de procesamiento serial. Los principales desafíos de la investigación radican en minimizar
+              los tiempos de respuesta, reducir la complejidad del hardware para disminuir el consumo de energía y garantizar
+              la máxima fiabilidad en la detección. Para solucionar esto, se plantea un circuito electrónico secuencial que
+              procesa los datos numéricos de forma iterativa y modular, reduciendo el tamaño físico y el costo del
+              hardware mediante técnicas de computación serial en lugar de arquitecturas paralelas complejas.</p>
+
+            <p></p>
+          </div>
+          <aside class="summary-card">
+            <h3>Ficha del proyecto</h3>
+            <p><strong>Materia:</strong> Sistemas digitales 2</p>
+            <p><strong>Docente:</strong> Ing. Jorge Mario León Gómez</p>
+            <p><strong>Semestre:</strong>6to Semestre — 2024</p>
+            <p><strong>Tipo:</strong> Proyecto final de asignatura</p>
+          </aside>
+        </div>
+
+        <div class="pill-list">
+          <span class="pill">Interfaz adaptable</span>
+          <span class="pill">Componentes modulares</span>
+          <span class="pill">Optimización de recursos</span> 
+          <span class="pill">Procesamiento serial</span>
+        </div>
+      </section>
+
+      <section class="section-panel" aria-label="Resultados del proyecto" style="margin-top: 40px;">
+        <span class="section-label">Resultados</span>
+        <h2>Impacto directo para el escalamiento del proyecto</h2>
+        <p class="subdesc">El diseño demostró que el procesamiento serial bit a bit permite expandir el sistema a números
+           de gran tamaño sin requerir rediseños complejos de ingeniería ni un aumento masivo de componentes físicos.</p>
+
+        <div class="grid-2">
+          <article class="summary-card">
+            <h3>Resultado</h3>
+            <p>Validación exitosa en el simulador Proteus de la lógica del circuito y del módulo de raíz aproximada,
+               el cual demostró una eficiencia matemática superior al optimizar los tiempos de ejecución. 
+               El sistema probó su capacidad de escalabilidad al permitir el procesamiento de números masivos
+                utilizando un hardware mínimo (por ejemplo, requiriendo un contador de solo 20 bits para un número de un millón),
+               eliminando así la necesidad de arquitecturas paralelas complejas y costosas.</p>
+          </article>
+          <article class="summary-card">
+            <h3>Aprendizaje</h3>
+            <p>Identificación del impacto del ruido en las señales de reloj de integrados síncronos reales, 
+              lo que resaltó la necesidad de hardware robusto en la implementación física y abrió la ruta para 
+              integrar generadores de números impares en futuras extensiones.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ── GALERÍA ── -->
+      <section aria-label="Fotos del proyecto" style="margin-top: 40px;">
+        <span class="section-label">Galería</span>
+        <div class="gallery-grid">
+          
+          <div class="foto-slot foto-main">
+            <img src="/images/proy11.jpeg" alt="Vista principal del detector de números primos" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          
+          <div class="foto-slot">
+            <img src="/images/proy12.jpeg" alt="Simulación del circuito secuencial" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          
+          <div class="foto-slot">
+            <img src="/images/proy13.jpeg" alt="Detalle del procesamiento serial bit a bit" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── DRIVE ── -->
+      <div class="drive-banner">
+        <div class="drive-banner-text">
+          <h3>¿Quieres ver los archivos completos?</h3>
+          <p>Toda la documentación, entregables y recursos del proyecto están disponibles en Google Drive.</p>
+        </div>
+        <a
+          href="https://docs.google.com/document/d/1AvxqjUwOmYgH6euQYrCI5TBJ9w-Q-kZa/edit?usp=drive_link&ouid=100589296194763426459&rtpof=true&sd=true"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-drive"
+        >
+          ↗ Abrir en Drive
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

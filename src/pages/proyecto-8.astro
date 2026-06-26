@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout title="Proyecto 8 — Portfolio">
+  <Navbar />
+
+  <style>
+    :root {
+      --clr-accent: #c8a96e;
+      --clr-dim: rgba(255,255,255,0.78);
+      --clr-surface: rgba(255,255,255,0.06);
+      --clr-border: rgba(255,255,255,0.1);
+      --ff-body: 'DM Sans', system-ui, sans-serif;
+      --ff-mono: 'DM Mono', 'Courier New', monospace;
+      --radius: 18px;
+    }
+
+    .project-page { position: relative; min-height: 100vh; padding: clamp(100px, 12vh, 140px) 24px 80px; background: linear-gradient(135deg, #101628 0%, #07101a 100%); color: #fff; font-family: var(--ff-body); overflow: hidden; }
+    .project-page::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(200,169,110,0.17), transparent 22%), radial-gradient(circle at left center, rgba(255,255,255,0.04), transparent 16%); pointer-events: none; }
+    .project-inner { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; }
+    .section-label { display: inline-block; font-family: var(--ff-mono); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--clr-accent); border-bottom: 1px solid var(--clr-accent); padding-bottom: 4px; margin-bottom: 1.2rem; }
+    h1 { font-size: clamp(2.8rem, 6vw, 4.2rem); line-height: 1.05; font-weight: 700; margin-bottom: 1rem; }
+    h1 span { display: inline-block; color: var(--clr-accent); }
+    .lead { max-width: 720px; font-size: 1.12rem; line-height: 1.85; color: var(--clr-dim); margin-bottom: 2.4rem; }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2.8rem; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 12px 16px; border-radius: 999px; background: var(--clr-surface); border: 1px solid var(--clr-border); font-family: var(--ff-mono); font-size: 0.78rem; letter-spacing: 0.1em; }
+    .hero-badge strong { color: var(--clr-accent); }
+    .hero-link { display: inline-flex; align-items: center; gap: 8px; font-family: var(--ff-mono); font-size: 0.78rem; letter-spacing: 0.1em; color: var(--clr-accent); border-bottom: 1px solid rgba(200,169,110,0.4); }
+    .section-panel { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 32px; margin-top: 56px; }
+    .section-panel h2 { font-size: clamp(1.7rem, 3vw, 2rem); margin-bottom: 1rem; }
+    .subdesc { color: var(--clr-dim); font-size: 0.95rem; line-height: 1.75; margin-bottom: 2rem; max-width: 700px; }
+    .grid-2 { display: grid; gap: 24px; }
+    @media (min-width: 840px) { .grid-2 { grid-template-columns: 1.3fr 0.7fr; } }
+    .summary-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 24px; }
+    .summary-card h3 { font-size: 0.88rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clr-accent); margin-bottom: 14px; }
+    .summary-card p { color: var(--clr-dim); line-height: 1.75; margin-bottom: 10px; }
+    .gallery { margin-top: 40px; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 16px; }
+    @media (min-width: 720px) { .gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .photo-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; min-height: 220px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 12px; }
+    .photo-card .photo-icon { font-size: 2.4rem; }
+    .photo-card span { color: var(--clr-dim); font-size: 0.92rem; }
+    .drive-panel { margin-top: 48px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); padding: 32px; display: flex; flex-direction: column; gap: 20px; }
+    @media (min-width: 720px) { .drive-panel { flex-direction: row; align-items: center; justify-content: space-between; } }
+    .drive-panel h3 { margin: 0; font-size: 1.35rem; }
+    .drive-panel p { color: var(--clr-dim); line-height: 1.75; max-width: 640px; margin: 0; }
+    .drive-link { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; background: linear-gradient(135deg, rgba(200,169,110,0.95), rgba(255,255,255,0.95)); color: #0b1018; font-weight: 700; font-family: var(--ff-mono); font-size: 0.9rem; text-decoration: none; }
+  </style>
+
+  <div class="project-page">
+    <div class="project-inner">
+      <span class="section-label">Seminario</span>
+      <h1>Productividad<br><span>digital</span></h1>
+      <p class="lead">Un seminario práctico que abordó métodos y herramientas clave para optimizar el trabajo diario en proyectos web y de diseño.</p>
+
+      <div class="hero-badges">
+        <span class="hero-badge"><strong>Formato:</strong> Seminario</span>
+        <span class="hero-badge"><strong>Enfoque:</strong> Productividad</span>
+        <span class="hero-badge"><strong>Aplicación:</strong> Herramientas reales</span>
+      </div>
+
+      <a href="/" class="hero-link">← Volver al inicio</a>
+
+      <section class="section-panel" aria-label="Descripción del seminario">
+        <span class="section-label">Descripción</span>
+        <h2>Métodos para trabajar con más foco</h2>
+        <p class="subdesc">Se exploraron prácticas simples que ayudan a organizar tareas, priorizar entregables y mantener una rutina de trabajo más eficiente.</p>
+
+        <div class="grid-2">
+          <div>
+            <p>El seminario presentó modelos para distribuir el tiempo, mejorar la colaboración de equipo y reducir la fricción al pasar de la idea al resultado.</p>
+            <p>También se revisaron plantillas y procesos que facilitan la documentación de decisiones y el seguimiento de avances.</p>
+          </div>
+          <aside class="summary-card">
+            <h3>Ficha</h3>
+            <p><strong>Duración:</strong> 2 jornadas</p>
+            <p><strong>Formato:</strong> Teórico + práctico</p>
+            <p><strong>Producto:</strong> Guía de trabajo</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="gallery" aria-label="Fotos del seminario">
+        <span class="section-label">Galería</span>
+        <div class="gallery-grid">
+          <div class="photo-card"><div class="photo-icon">📝</div><span>Notas y herramientas</span></div>
+          <div class="photo-card"><div class="photo-icon">🧭</div><span>Ruta del proceso</span></div>
+          <div class="photo-card"><div class="photo-icon">🚀</div><span>Resultados prácticos</span></div>
+        </div>
+      </section>
+
+      <div class="drive-panel">
+        <div>
+          <h3>Ver carpeta de recursos</h3>
+          <p>Descarga los materiales, las guías de productividad y los recursos compartidos en Drive.</p>
+        </div>
+        <a href="https://drive.google.com/tu-enlace-aqui" target="_blank" rel="noopener noreferrer" class="drive-link">Abrir en Google Drive ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>
