@@ -2,6 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+
+const basePath = (import.meta.env.PUBLIC_BASE || '/').replace(/\/?$/, '/');
 ---
 <BaseLayout title="Proyecto 8 — Portfolio">
   <Navbar />
@@ -61,7 +63,7 @@ import Footer from '../components/Footer.astro';
         <span class="hero-badge"><strong>Aplicación:</strong> Herramientas reales</span>
       </div>
 
-      <a href="/" class="hero-link">← Volver al inicio</a>
+      <a href={basePath} class="hero-link">← Volver al inicio</a>
 
       <section class="section-panel" aria-label="Descripción del seminario">
         <span class="section-label">Descripción</span>

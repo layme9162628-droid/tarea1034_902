@@ -3,6 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Footer from '../components/Footer.astro';
 import { Image } from 'astro:assets';
 import { getImage } from '../utils/images';
+
+const basePath = (import.meta.env.PUBLIC_BASE || '/').replace(/\/?$/, '/');
 ---
 <BaseLayout title="Proyecto 1">
 
@@ -136,7 +138,7 @@ import { getImage } from '../utils/images';
         <span class="hero-badge">Circuitos Integrados</span>  
       </div>
 
-      <a href="/" class="btn-back">← Volver al inicio</a>
+      <a href={basePath} class="btn-back">← Volver al inicio</a>
 
       <section class="section-panel" aria-label="Descripción del proyecto" style="margin-top: 60px;">
         <span class="section-label">Resumen</span>
